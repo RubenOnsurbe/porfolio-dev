@@ -1,0 +1,36 @@
+---
+import ExperienceItem from "./ExperienceItem.astro";
+
+const EXPERIENCE = [
+    {
+        date: "Actualidad",
+        title: "Practicas Grado Superior Desarrollo de Aplicaciones Web | Somos Crater",
+        description:
+            "Practicas de desarrollo de una aplicacion de gestion de marcas.",
+        link: "https://somoscrater.es/",
+    },
+    {
+        date: "Mediados de Abril 2022 - Principios de Junio 2022",
+        title: "Practicas Erasmus Grado Medio Sistema Microinformáticos y Redes | Colegio Frances",
+        description:
+            "Practicas Beca Erasmus de mantenimiento de ordenadores en un insituto en el norte de Francia.",
+    },
+    {
+        date: "Marzo 2022 - Mediados de Abril 2022",
+        title: "Practicas Grado Medio Sistema Microinformáticos y Redes | Certelia",
+        description:
+            "Practicas de desarrollo en visual basics para una aplicacion de gestion de datos de clientes.",
+        link: "https://www.certelia.com/",
+    },
+];
+---
+
+<ol class="relative border-s border-gray-200 ml-3">
+    {
+        EXPERIENCE.map((experience, index) => (
+            <li class="mb-10 ms-4">
+                <ExperienceItem {...experience} />
+            </li>
+        ))
+    }
+</ol>

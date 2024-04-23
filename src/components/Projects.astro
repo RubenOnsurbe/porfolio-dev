@@ -1,0 +1,142 @@
+---
+import GitHub from "../icons/Github.astro";
+import CSS from "../icons/Css.astro";
+import TypeScript from "../icons/TypeScript.astro";
+import HTML from "../icons/Html.astro";
+import PHP from "../icons/Php.astro";
+import Laravel from "../icons/Laravel.astro";
+import Angular from "../icons/Angular.astro";
+import MySQL from "../icons/Mysql.astro";
+import Link from "../icons/Link.astro";
+import LinkButton from "./LinkButton.astro";
+import AstroIcon from "../icons/AstroIcon.astro";
+import TailwindCSS from "../icons/TailwindCSS.astro";
+
+const TAGS = {
+    TYPESCRIPT: {
+        name: "TypeScript",
+        class: "bg-blue-400 text-white",
+        icon: TypeScript,
+    },
+    HTML: {
+        name: "HTML",
+        class: "bg-red-300 text-white",
+        icon: HTML,
+    },
+    CSS: {
+        name: "CSS",
+        class: "bg-blue-500 text-white",
+        icon: CSS,
+    },
+    LARAVEL: {
+        name: "Laravel",
+        class: "bg-red-500 text-white",
+        icon: Laravel,
+    },
+    ANGULAR: {
+        name: "Angular",
+        class: "bg-violet-400 text-white",
+        icon: Angular,
+    },
+    PHP: {
+        name: "PHP",
+        class: "bg-blue-500 text-white",
+        icon: PHP,
+    },
+    MYSQL: {
+        name: "MySQL",
+        class: "bg-blue-400 text-white",
+        icon: MySQL,
+    },
+    ASTRO: {
+        name: "Astro",
+        class: "bg-orange-800 text-white",
+        icon: AstroIcon,
+    },
+    TAILWINDCSS: {
+        name: "TailwindCSS",
+        class: "bg-blue-900 text-white",
+        icon: TailwindCSS,
+    },
+};
+const PROJECTS = [
+    {
+        title: "TFG | Gestion de Clubes Deportivos",
+        description:
+            "Apliacación web para la gestión de clubes deportivos. Permite la gestión de juagadores, entrenadores, actividades, etc.",
+        image: "/projects/tfg.webp",
+        link: "https://sport-team-creator-front.vercel.app/",
+        github: "https://github.com/RubenOnsurbe/SportTeamCreator_Front",
+        tags: [
+            TAGS.TYPESCRIPT,
+            TAGS.ANGULAR,
+            TAGS.HTML,
+            TAGS.CSS,
+            TAGS.MYSQL,
+            TAGS.PHP,
+        ],
+    },
+    {
+        title: "Porfolio | Rubén Onsurbe",
+        description:
+            "Porfolio personal para mostrar mis proyectos y habilidades.",
+        image: "/projects/porfolio.webp",
+        link: "https://sport-team-creator-front.vercel.app/",
+        github: "https://github.com/RubenOnsurbe/SportTeamCreator_Front",
+        tags: [TAGS.ASTRO, TAGS.TAILWINDCSS],
+    },
+];
+---
+
+<div class="flex flex-col gap-y-16">
+    {
+        PROJECTS.map(({ image, title, description, tags, link, github }) => (
+            <article class="flex flex-col space-x-0 space-y-8 group md:flex-row md:space-x-8 md:space-y-0">
+                <div class="w-full md:w-1/2">
+                    <div class="relative flex flex-col items-center col-span-6 row-span-5 gap-8 transition duration-500 ease-in-out transform shadow-xl overflow-clip rounded-xl sm:rounded-xl md:group-hover:-translate-y-1 md:group-hover:shadow-2xl lg:border lg:border-gray-800 lg:hover:border-gray-700 lg:hover:bg-gray-800/50">
+                        <img
+                            alt="Recién llegado vs 5 años en Nueva Zelanda"
+                            class="object-cover object-top w-full h-56 transition duration-500 sm:h-full md:scale-110 md:group-hover:scale-105"
+                            loading="lazy"
+                            src={image}
+                        />
+                    </div>
+                </div>
+
+                <div class="w-full md:w-1/2 md:max-w-lg">
+                    <h3 class="text-2xl font-bold text-gray-100">{title}</h3>
+                    <div class="flex flex-wrap mt-2">
+                        <ul class="flex flex-row mb-2 gap-x-2">
+                            {tags.map((tag) => (
+                                <li>
+                                    <span
+                                        class={`flex gap-x-2 rounded-full text-xs ${tag.class} py-1 px-2 `}
+                                    >
+                                        <tag.icon class="size-4" />
+                                        {tag.name}
+                                    </span>
+                                </li>
+                            ))}
+                        </ul>
+
+                        <div class="mt-2 text-gray-400">{description}</div>
+                        <footer class="flex items-end justify-start mt-4 gap-x-4">
+                            {github && (
+                                <LinkButton href={github}>
+                                    <GitHub class="size-6" />
+                                    Code
+                                </LinkButton>
+                            )}
+                            {link && (
+                                <LinkButton href={link}>
+                                    <Link class="size-4" />
+                                    Preview
+                                </LinkButton>
+                            )}
+                        </footer>
+                    </div>
+                </div>
+            </article>
+        ))
+    }
+</div>
