@@ -103,6 +103,14 @@ const PROJECTS = [
         github: "https://github.com/RubenOnsurbe/RECETAS-PARA-RUBEN",
         tags: [TAGS.ASTRO, TAGS.TAILWINDCSS],
     },
+    {
+        title: "En progreso | InToJobs",
+        description:
+            "Web para la gestion de trabajos. En progreso...",
+        image: "/projects/intojobs.webp",
+        link: "https://intojobs.vercel.app/",
+        tags: [TAGS.ASTRO, TAGS.CSS],
+    }
 ];
 ---
 
@@ -128,7 +136,7 @@ const PROJECTS = [
                             {tags.map((tag) => (
                                 <li>
                                     <span
-                                        class={`flex gap-x-2 rounded-full text-xs ${tag.class} py-1 px-2 `}
+                                        class={`flex gap-x-2 rounded-full text-xs ${tag.class} py-1 px-2 hover:scale-110 transition duration-300 ease-in-out`}
                                     >
                                         <tag.icon class="size-4" />
                                         {tag.name}

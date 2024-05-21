@@ -4,9 +4,10 @@
     <div
         class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between"
     >
-        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400"
-            >© 2023 <a href="#" class="hover:underline">Ruben™</a>. Todos los
-            derechos reservados.
+        <span
+            id="current-year"
+            class="text-sm text-gray-500 sm:text-center dark:text-gray-400"
+        >
         </span>
         <ul
             class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0"
@@ -22,15 +23,35 @@
                 >
             </li>
             <li>
-                <a href="#proyectos" class="hover:underline me-4 md:me-6"
-                    >Proyectos</a
+                <a href="#competencias" class="hover:underline me-4 md:me-6"
+                    >Competencias</a
                 >
-            </li>
-            <li>
-                <a href="mailto:ruben.onsurbe@gmail.com" class="hover:underline"
-                    >Contacto</a
-                >
+                <li>
+                    <a href="#proyectos" class="hover:underline me-4 md:me-6"
+                        >Proyectos</a
+                    >
+                </li>
+                <li>
+                    <a
+                        href="mailto:ruben.onsurbe@gmail.com"
+                        class="hover:underline">Contacto</a
+                    >
+                </li>
             </li>
         </ul>
     </div>
 </footer>
+<script>
+    // Obtén el año actual
+    const currentYear = new Date().getFullYear();
+    if (document.getElementById("current-year")) {
+        const currentYearElement = document.getElementById("current-year");
+        if (currentYearElement) {
+            currentYearElement.textContent =
+                "© " +
+                currentYear.toString() +
+                " Ruben™. Todos los derechos reservados.";
+            currentYearElement.classList.add("hover:underline");
+        }
+    }
+</script>

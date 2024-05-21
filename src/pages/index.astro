@@ -1,6 +1,5 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Header from "../components/Header.astro";
 import Badge from "../components/Badge.astro";
 import Linkedin from "../icons/Linkedin.astro";
 import Github from "../icons/Github.astro";
@@ -10,6 +9,8 @@ import SectionContainer from "../components/SectionContainer.astro";
 import Briefcase from "../icons/Briefcase.astro";
 import CodeIcon from "../icons/Code.astro";
 import Projects from "../components/Projects.astro";
+import Visual from "../icons/Visual.astro";
+import Cv from "../icons/cv.astro";
 ---
 
 <Layout
@@ -70,11 +71,12 @@ import Projects from "../components/Projects.astro";
 				</a>
 				<a
 					target="_blank"
-					rel="noopener"
+					rel="noopener noreferrer"
 					class="bg-white/5 rounded-full border border-white/10 flex justify-center items-center gap-x-2 py-1 px-2 md:py-2 md:px-4 transition hover:bg-white/10 hover:scale-110 text-xs lg:text-base"
-					href="/files/CV_Ruben_Onsurbe.pdf"
+					href="/cv.pdf"
 				>
-					<Gmail class="size-4 md:size-6" />CV
+					<Cv class="size-4 md:size-6" />
+					CV
 				</a>
 			</nav>
 		</SectionContainer>
@@ -84,6 +86,12 @@ import Projects from "../components/Projects.astro";
 				Experiencia Laboral
 			</h2>
 			<Experience />
+		</SectionContainer>
+		<SectionContainer id="competencias" class="py-30 pb-20">
+			<h2 class="text-4xl font-semibold mb-6 flex gap-x-2 items-center">
+				<Visual class="size-7" />
+				Competencias
+			</h2>
 		</SectionContainer>
 		<SectionContainer id="proyectos">
 			<h2 class="text-4xl font-semibold mb-6 flex gap-x-2 items-center">
