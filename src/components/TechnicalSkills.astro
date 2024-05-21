@@ -1,0 +1,78 @@
+---
+const skills = {
+    frontend: [
+        {
+            name: "Angular",
+            description:
+                "Implementé complejas interfaces de usuario con Angular para proyectos corporativos.",
+            experience: "1 año",
+        },
+        {
+            name: "Astro",
+            description:
+                "Desarrollé sitios web estáticos con Astro, un nuevo marco de trabajo para la web moderna.",
+            experience: "6 meses",
+        },
+    ],
+    backend: [
+        {
+            name: "Laravel",
+            description:
+                "Desarrollé aplicaciones web y APIs RESTful con Laravel.",
+            experience: "1 año",
+        },
+    ],
+};
+
+const getImagePath = (framework) =>
+    `/frameworks/${framework.toLowerCase()}.webp`;
+---
+
+<div class="container mx-auto py-8">
+    <div class="mb-8">
+        <h3 class="text-2xl font-semibold mb-3">Frontend</h3>
+        <ul class="list-none space-y-4">
+            {
+                skills.frontend.map((skill) => (
+                    <li class="flex items-start space-x-4">
+                        <img
+                            src={getImagePath(skill.name)}
+                            alt={skill.name}
+                            class="w-40 h-auto"
+                        />
+                        <div>
+                            <h4 class="text-lg font-semibold">{skill.name}:</h4>
+                            <p class="text-sm">{skill.description}</p>
+                            <p class="text-sm text-gray-600">
+                                Experiencia: {skill.experience}
+                            </p>
+                        </div>
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+    <div>
+        <h3 class="text-2xl font-semibold mb-3">Backend</h3>
+        <ul class="list-none space-y-4">
+            {
+                skills.backend.map((skill) => (
+                    <li class="flex items-start space-x-4">
+                        <img
+                            src={getImagePath(skill.name)}
+                            alt={skill.name}
+                            class="w-40 h-auto"
+                        />
+                        <div>
+                            <h4 class="text-lg font-semibold">{skill.name}:</h4>
+                            <p class="text-sm">{skill.description}</p>
+                            <p class="text-sm text-gray-600">
+                                Experiencia: {skill.experience}
+                            </p>
+                        </div>
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+</div>
