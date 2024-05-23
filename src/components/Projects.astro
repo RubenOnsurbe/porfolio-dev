@@ -12,26 +12,32 @@ import Link from "../icons/Link.astro";
 import LinkButton from "./LinkButton.astro";
 import AstroIcon from "../icons/AstroIcon.astro";
 import TailwindCSS from "../icons/TailwindCSS.astro";
+import React from "../icons/React.astro";
 
 const TAGS = {
     TYPESCRIPT: {
         name: "TypeScript",
-        class: "bg-blue-400 text-white",
+        class: "bg-blue-600 text-white",
         icon: TypeScript,
+    },
+    REACT: {
+        name: "React",
+        class: "bg-blue-900 text-white",
+        icon: React,
     },
     JS: {
         name: "JavaScript",
-        class: "bg-yellow-400 text-white",
+        class: "bg-yellow-600 text-white",
         icon: JavaScript,
     },
     HTML: {
         name: "HTML",
-        class: "bg-red-300 text-white",
+        class: "bg-red-400 text-white",
         icon: HTML,
     },
     CSS: {
         name: "CSS",
-        class: "bg-blue-500 text-white",
+        class: "bg-blue-800 text-white",
         icon: CSS,
     },
     LARAVEL: {
@@ -41,17 +47,17 @@ const TAGS = {
     },
     ANGULAR: {
         name: "Angular",
-        class: "bg-violet-400 text-white",
+        class: "bg-violet-900 text-white",
         icon: Angular,
     },
     PHP: {
         name: "PHP",
-        class: "bg-blue-500 text-white",
+        class: "bg-blue-800 text-white",
         icon: PHP,
     },
     MYSQL: {
         name: "MySQL",
-        class: "bg-blue-400 text-white",
+        class: "bg-blue-300 text-white",
         icon: MySQL,
     },
     ASTRO: {
@@ -99,7 +105,7 @@ const PROJECTS = [
         image: "/projects/spotify.webp",
         link: "https://spotify-clon-rdev.vercel.app/",
         github: "https://github.com/RubenOnsurbe/spotify-clon",
-        tags: [TAGS.ASTRO, TAGS.TAILWINDCSS],
+        tags: [TAGS.ASTRO, TAGS.TAILWINDCSS, TAGS.REACT],
     },
     {
         title: "Recetas Ruben",
