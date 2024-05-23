@@ -6,6 +6,7 @@ import HTML from "../icons/Html.astro";
 import PHP from "../icons/Php.astro";
 import Laravel from "../icons/Laravel.astro";
 import Angular from "../icons/Angular.astro";
+import JavaScript from "../icons/JavaScript.astro";
 import MySQL from "../icons/Mysql.astro";
 import Link from "../icons/Link.astro";
 import LinkButton from "./LinkButton.astro";
@@ -17,6 +18,11 @@ const TAGS = {
         name: "TypeScript",
         class: "bg-blue-400 text-white",
         icon: TypeScript,
+    },
+    JS: {
+        name: "JavaScript",
+        class: "bg-yellow-400 text-white",
+        icon: JavaScript,
     },
     HTML: {
         name: "HTML",
@@ -110,7 +116,7 @@ const PROJECTS = [
             "Web para la gestion de trabajos. En progreso...",
         image: "/projects/intojobs.webp",
         link: "https://intojobs.vercel.app/",
-        tags: [TAGS.ASTRO, TAGS.CSS],
+        tags: [TAGS.ASTRO, TAGS.CSS, TAGS.JS],
     }
 ];
 ---
