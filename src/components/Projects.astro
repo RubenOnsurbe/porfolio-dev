@@ -78,7 +78,8 @@ const PROJECTS = [
             "Apliacación web para la gestión de clubes deportivos. Permite la gestión de juagadores, entrenadores, actividades, etc.",
         image: "/projects/tfg.webp",
         link: "https://sport-team-creator-front.vercel.app/",
-        github: "https://github.com/RubenOnsurbe/SportTeamCreator_Front",
+        front: "https://github.com/RubenOnsurbe/SportTeamCreator_Front",
+        back: "https://github.com/RubenOnsurbe/SportsTeamCreator-Back",
         tags: [
             TAGS.LARAVEL,
             TAGS.ANGULAR,
@@ -129,7 +130,7 @@ const PROJECTS = [
 
 <div class="flex flex-col gap-y-16">
     {
-        PROJECTS.map(({ image, title, description, tags, link, github }) => (
+        PROJECTS.map(({ image, title, description, tags, link, github, front, back }) => (
             <article class="flex flex-col space-x-0 space-y-8 group md:flex-row md:space-x-8 md:space-y-0">
                 <div class="w-full md:w-1/2">
                     <div class="relative flex flex-col items-center col-span-6 row-span-5 gap-8 transition duration-500 ease-in-out transform shadow-xl overflow-clip rounded-xl sm:rounded-xl md:group-hover:-translate-y-1 md:group-hover:shadow-2xl lg:border lg:border-gray-800 lg:hover:border-gray-700 lg:hover:bg-gray-800/50">
@@ -160,6 +161,18 @@ const PROJECTS = [
 
                         <div class="mt-2 text-gray-400">{description}</div>
                         <footer class="flex items-end justify-start mt-4 gap-x-4">
+                            {front && (
+                                <LinkButton href={front}>
+                                    <GitHub class="size-6" />
+                                    Front Code
+                                </LinkButton>
+                            )}
+                            {back && (
+                                <LinkButton href={back}>
+                                    <GitHub class="size-6" />
+                                    Back Code
+                                </LinkButton>
+                            )}
                             {github && (
                                 <LinkButton href={github}>
                                     <GitHub class="size-6" />
