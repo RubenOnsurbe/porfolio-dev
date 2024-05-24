@@ -13,6 +13,7 @@ import LinkButton from "./LinkButton.astro";
 import AstroIcon from "../icons/AstroIcon.astro";
 import TailwindCSS from "../icons/TailwindCSS.astro";
 import React from "../icons/React.astro";
+import Supabase from "../icons/Supabase.astro";
 
 const TAGS = {
     TYPESCRIPT: {
@@ -70,6 +71,11 @@ const TAGS = {
         class: "bg-blue-900 text-white",
         icon: TailwindCSS,
     },
+    SUPABASE: {
+        name: "Supabase",
+        class: "bg-blue-900 text-white",
+        icon: Supabase,
+    },
 };
 const PROJECTS = [
     {
@@ -123,7 +129,7 @@ const PROJECTS = [
             "Web para la gestion de trabajos. En progreso...",
         image: "/projects/intojobs.webp",
         link: "https://intojobs.vercel.app/",
-        tags: [TAGS.ASTRO, TAGS.CSS, TAGS.JS],
+        tags: [TAGS.ASTRO, TAGS.CSS, TAGS.JS, TAGS.SUPABASE],
     }
 ];
 ---
