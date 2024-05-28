@@ -15,14 +15,14 @@ import TechnicalSkills from "../components/TechnicalSkills.astro";
 ---
 
 <Layout
-	title="Porfolio de Ruben - Desarrollador y programador Web "
+	title="Porfolio de Ruben - Desarrollador y programador Web"
 	description="Conoce a Ruben Onsurbe, Desarrollador Web que busca trabajo en Madrid, España. Conoce sus proyectos y habilidades."
 >
 	<main class="px-4">
-		<SectionContainer id="sobre-mi" class="py-44 pb-20">
-			<div class="flex gap-4 mb-4 items-center">
+		<SectionContainer id="sobre-mi">
+			<div class="flex flex-col lg:flex-row gap-4 mb-4 items-center">
 				<h1
-					class="text-white text-2xl lg:text-5xl font-bold flex flex-row gap-x-4 pb-6 lg:pb-10"
+					class="text-white text-2xl lg:text-5xl font-bold pb-6 lg:pb-10"
 				>
 					Hey, soy Ruben
 				</h1>
@@ -30,13 +30,15 @@ import TechnicalSkills from "../components/TechnicalSkills.astro";
 					href="https://www.linkedin.com/in/ruben-onsurbe-heredia-a7895a253/"
 					target="_blank"
 					rel="noopener"
-					class="flex justify-center pb-10 items-center transition md:justify-center md:hover:scale-105"
+					class="flex justify-center items-center transition md:hover:scale-105"
 				>
 					<Badge>Disponible para trabajar</Badge>
 				</a>
 			</div>
 
-			<h2 class="text-xl lg:text-2xl opacity-80 text-wrap max-w-[700px]">
+			<h2
+				class="text-xl lg:text-2xl opacity-80 max-w-full lg:max-w-[700px]"
+			>
 				Desarrollador Web Junior recien titulado en Desarrollo de
 				aplicaciones Web. Me encanta el mundo de la programación y la
 				tecnología, siempre estoy aprendiendo cosas nuevas y mejorando
@@ -44,7 +46,7 @@ import TechnicalSkills from "../components/TechnicalSkills.astro";
 				granito de arena en los proyectos en los que participo. De
 				Madrid, España.
 			</h2>
-			<nav class="flex gap-4 mt-8 flex-wrap">
+			<nav class="flex flex-col sm:flex-row gap-4 mt-8 flex-wrap">
 				<a
 					target="_blank"
 					rel="noopener"
@@ -74,30 +76,41 @@ import TechnicalSkills from "../components/TechnicalSkills.astro";
 					target="_blank"
 					rel="noopener noreferrer"
 					class="bg-white/5 rounded-full border border-white/10 flex justify-center items-center gap-x-2 py-1 px-2 md:py-2 md:px-4 transition hover:bg-white/10 hover:scale-110 text-xs lg:text-base"
-					href="/cv.pdf"
+					href="/files/cv.pdf"
 				>
-					<Cv class="size-4 md:size-6" />
-					CV
+					<Cv class="size-4 md:size-6" />CV
 				</a>
 			</nav>
 		</SectionContainer>
-		<SectionContainer id="experiencia" class="py-30 pb-20">
-			<h2 class="text-4xl font-semibold mb-6 flex gap-x-2 items-center">
-				<Briefcase class="size-7" />
+		<SectionContainer
+			id="experiencia"
+			class="py-20 lg:py-30 pb-10 lg:pb-20"
+		>
+			<h2
+				class="text-3xl lg:text-4xl font-semibold mb-6 flex gap-x-2 items-center"
+			>
+				<Briefcase class="size-6 lg:size-7" />
 				Experiencia Laboral
 			</h2>
 			<Experience />
 		</SectionContainer>
-		<SectionContainer id="habilidades-tecnicas" class="py-30 pb-20">
-			<h2 class="text-4xl font-semibold mb-6 flex gap-x-2 items-center">
-				<Visual class="size-7" />
+		<SectionContainer
+			id="habilidades-tecnicas"
+			class="py-20 lg:py-30 pb-10 lg:pb-20"
+		>
+			<h2
+				class="text-3xl lg:text-4xl font-semibold mb-6 flex gap-x-2 items-center"
+			>
+				<Visual class="size-6 lg:size-7" />
 				Habilidades Técnicas
 			</h2>
 			<TechnicalSkills />
 		</SectionContainer>
-		<SectionContainer id="proyectos">
-			<h2 class="text-4xl font-semibold mb-6 flex gap-x-2 items-center">
-				<CodeIcon class="size-7 text-white" />
+		<SectionContainer id="proyectos" class="py-20 lg:py-30">
+			<h2
+				class="text-3xl lg:text-4xl font-semibold mb-6 flex gap-x-2 items-center"
+			>
+				<CodeIcon class="size-6 lg:size-7 text-white" />
 				Proyectos
 			</h2>
 			<Projects />

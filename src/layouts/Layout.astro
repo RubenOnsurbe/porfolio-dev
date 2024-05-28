@@ -18,7 +18,7 @@ const { title, description } = Astro.props;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" type="image" href="/r-dev.webp" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
@@ -45,6 +45,7 @@ const { title, description } = Astro.props;
 					black,
 					darkblue
 				); /* Degradado de negro a azul oscuro */
+				padding: 0 1rem;
 			}
 			@media (prefers-reduced-motion: reduce) {
 				html {
@@ -52,5 +53,33 @@ const { title, description } = Astro.props;
 				}
 			}
 		</style>
-	</body>
+	</body><style>
+		/* Ajuste general para móviles */
+		@media (max-width: 640px) {
+			.text-2xl {
+				font-size: 1.5rem;
+			}
+
+			.text-4xl {
+				font-size: 2rem;
+			}
+
+			.size-7 {
+				width: 2rem;
+				height: 2rem;
+			}
+		}
+
+		/* Ajuste para pantallas medianas */
+		@media (min-width: 641px) and (max-width: 1024px) {
+			.text-5xl {
+				font-size: 3rem;
+			}
+
+			.size-7 {
+				width: 2.5rem;
+				height: 2.5rem;
+			}
+		}
+	</style>
 </html>
