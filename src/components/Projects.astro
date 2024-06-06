@@ -125,84 +125,95 @@ const PROJECTS = [
     },
     {
         title: "En progreso | InToJobs",
-        description:
-            "Web para la gestion de trabajos. En progreso...",
+        description: "Web para la gestion de trabajos. En progreso...",
         image: "/projects/intojobs.webp",
         link: "https://intojobs.vercel.app/",
         tags: [TAGS.ASTRO, TAGS.CSS, TAGS.JS, TAGS.SUPABASE],
     },
     {
         title: "En progreso | travelAgenda",
-        description:
-            "Web para la gestión de viajes. En progreso...",
+        description: "Web para la gestión de viajes. En progreso...",
         image: "/projects/travelAgenda.webp",
         link: "https://travelagenda.vercel.app/",
         tags: [TAGS.ASTRO, TAGS.CSS, TAGS.JS, TAGS.SUPABASE],
-    }
+    },
 ];
 ---
 
 <div class="flex flex-col gap-y-16">
     {
-        PROJECTS.map(({ image, title, description, tags, link, github, front, back }) => (
-            <article class="flex flex-col space-x-0 space-y-8 group md:flex-row md:space-x-8 md:space-y-0">
-                <div class="w-full md:w-1/2">
-                    <div class="relative flex flex-col items-center col-span-6 row-span-5 gap-8 transition duration-500 ease-in-out transform shadow-xl overflow-clip rounded-xl sm:rounded-xl md:group-hover:-translate-y-1 md:group-hover:shadow-2xl lg:border lg:border-gray-800 lg:hover:border-gray-700 lg:hover:bg-gray-800/50">
-                        <img
-                            alt=`Foto del proyecto: ${title}`
-                            class="object-cover object-top w-full h-56 transition duration-500 sm:h-full md:scale-110 md:group-hover:scale-105"
-                            loading="lazy"
-                            src={image}
-                        />
+        PROJECTS.map(
+            ({
+                image,
+                title,
+                description,
+                tags,
+                link,
+                github,
+                front,
+                back,
+            }) => (
+                <article class="flex flex-col space-x-0 space-y-8 group md:flex-row md:space-x-8 md:space-y-0">
+                    <div class="w-full md:w-1/2">
+                        <div class="relative flex flex-col items-center col-span-6 row-span-5 gap-8 transition duration-500 ease-in-out transform shadow-xl overflow-clip rounded-xl sm:rounded-xl md:group-hover:-translate-y-1 md:group-hover:shadow-2xl lg:border lg:border-gray-800 lg:hover:border-gray-700 lg:hover:bg-gray-800/50">
+                            <img
+                                alt={`Foto del proyecto: ${title}`}
+                                class="object-cover object-top w-full h-56 transition duration-500 sm:h-full md:scale-110 md:group-hover:scale-105"
+                                loading="lazy"
+                                src={image}
+                            />
+                        </div>
                     </div>
-                </div>
 
-                <div class="w-full md:w-1/2 md:max-w-lg">
-                    <h3 class="text-2xl font-bold text-gray-100">{title}</h3>
-                    <div class="flex flex-wrap mt-2">
-                        <ul class="flex flex-row mb-2 gap-x-2">
-                            {tags.map((tag) => (
-                                <li>
-                                    <span
-                                        class={`flex gap-x-2 rounded-full text-xs ${tag.class} py-1 px-2 hover:scale-110 transition duration-300 ease-in-out`}
-                                    >
-                                        <tag.icon class="size-4" />
-                                        {tag.name}
-                                    </span>
-                                </li>
-                            ))}
-                        </ul>
+                    <div class="w-full md:w-1/2 md:max-w-lg">
+                        <h3 class="text-2xl font-bold text-gray-100">
+                            {title}
+                        </h3>
+                        <div class="flex flex-wrap mt-2">
+                            <ul class="flex flex-wrap gap-2">
+                                {tags.map((tag) => (
+                                    <li>
+                                        <span
+                                            class={`flex items-center gap-2 rounded-full text-xs ${tag.class} py-1 px-2 hover:scale-110 transition duration-300 ease-in-out`}
+                                        >
+                                            <tag.icon class="size-4" />
+                                            {tag.name}
+                                        </span>
+                                    </li>
+                                ))}
+                            </ul>
 
-                        <div class="mt-2 text-gray-400">{description}</div>
-                        <footer class="flex items-end justify-start mt-4 gap-x-4">
-                            {front && (
-                                <LinkButton href={front}>
-                                    <GitHub class="size-6" />
-                                    Front
-                                </LinkButton>
-                            )}
-                            {back && (
-                                <LinkButton href={back}>
-                                    <GitHub class="size-6" />
-                                    Back
-                                </LinkButton>
-                            )}
-                            {github && (
-                                <LinkButton href={github}>
-                                    <GitHub class="size-6" />
-                                    Code
-                                </LinkButton>
-                            )}
-                            {link && (
-                                <LinkButton href={link}>
-                                    <Link class="size-4" />
-                                    Preview
-                                </LinkButton>
-                            )}
-                        </footer>
+                            <div class="mt-2 text-gray-400">{description}</div>
+                            <footer class="flex items-end justify-start mt-4 gap-x-4">
+                                {front && (
+                                    <LinkButton href={front}>
+                                        <GitHub class="size-6" />
+                                        Front
+                                    </LinkButton>
+                                )}
+                                {back && (
+                                    <LinkButton href={back}>
+                                        <GitHub class="size-6" />
+                                        Back
+                                    </LinkButton>
+                                )}
+                                {github && (
+                                    <LinkButton href={github}>
+                                        <GitHub class="size-6" />
+                                        Code
+                                    </LinkButton>
+                                )}
+                                {link && (
+                                    <LinkButton href={link}>
+                                        <Link class="size-4" />
+                                        Preview
+                                    </LinkButton>
+                                )}
+                            </footer>
+                        </div>
                     </div>
-                </div>
-            </article>
-        ))
+                </article>
+            ),
+        )
     }
 </div>
