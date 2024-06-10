@@ -14,7 +14,9 @@ import AstroIcon from "../icons/AstroIcon.astro";
 import TailwindCSS from "../icons/TailwindCSS.astro";
 import React from "../icons/React.astro";
 import Supabase from "../icons/Supabase.astro";
+import Turso from "../icons/Turso.astro";
 import Document from "../icons/Document.astro";
+import NodeJS from "../icons/NodeJS.astro";
 
 const TAGS = {
     TYPESCRIPT: {
@@ -77,6 +79,16 @@ const TAGS = {
         class: "bg-blue-900 text-white",
         icon: Supabase,
     },
+    TURSO: {
+        name: "Turso",
+        class: "bg-blue-900 text-white",
+        icon: Turso,
+    },
+    NODEJS: {
+        name: "NodeJS",
+        class: "bg-green-500 text-white",
+        icon: NodeJS,
+    },
 };
 const PROJECTS = [
     {
@@ -135,7 +147,7 @@ const PROJECTS = [
         image: "/projects/mensajeria.webp",
         link: "https://chat-ruben.vercel.app/",
         github: "https://github.com/RubenOnsurbe/chat-tiempo-real",
-        tags: [TAGS.HTML, TAGS.CSS, TAGS.JS],
+        tags: [TAGS.HTML, TAGS.CSS, TAGS.JS, TAGS.TURSO, TAGS.NODEJS],
     },
 ];
 ---
