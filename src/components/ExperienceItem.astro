@@ -29,14 +29,14 @@ const isArray = Array.isArray(description);
                 typeof item === "string" ? (
                     <p>{item}</p>
                 ) : (
-                    <li>
+                    <p>
                         {item.title}
                         <ul class="list-none ml-5 mt-1">
                             {item.items.map((subitem) => (
                                 <li>🔹 {subitem}</li>
                             ))}
                         </ul>
-                    </li>
+                    </p>
                 ),
             )}
         </ul>
