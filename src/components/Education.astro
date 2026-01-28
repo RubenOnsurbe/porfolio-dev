@@ -1,0 +1,37 @@
+---
+import EducationItem from "./EducationItem.astro";
+
+const EDUCATION = [
+    {
+        title: "Grado Superior en Diseño de Aplicaciones Web",
+        description: "IES Ciudad Escolar, Madrid",
+    },
+    {
+        title: "Grado Medio de Sistemas Microinformaticos y Redes",
+        description: "IES Angel Corella, Colmenar Viejo, Madrid",
+    },
+    {
+        title: "Educacion Secundaria Obligatoria",
+        description: "IES Sierra de Guadarrama, Soto del Real, Madrid",
+    },
+];
+---
+
+<ol class="relative space-y-8">
+    <!-- Línea vertical central -->
+    <div
+        class="absolute left-6 top-0 bottom-0 w-1 bg-gradient-to-b from-cyan-500 via-violet-500 to-pink-500 shadow-lg shadow-cyan-500/50"
+    >
+    </div>
+
+    {
+        EDUCATION.map((education, index) => (
+            <li class="relative pl-20">
+                <EducationItem
+                    title={education.title}
+                    description={education.description}
+                />
+            </li>
+        ))
+    }
+</ol>

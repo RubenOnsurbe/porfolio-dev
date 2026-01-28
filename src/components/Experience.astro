@@ -6,24 +6,24 @@ const EXPERIENCE = [
         date: "Febrero 2025 - Actualidad",
         title: "Desarrollador de Software | Flops Ingeniería",
         description: [
-            {
-                title: "Desarrollo de aplicación para la gestión de presupuestos de distintos colegios y áreas, utilizando HTML, CSS, PHP y JavaScript. La aplicación incluye autenticación segura mediante SSL de Microsoft corporativo y cuenta con diferentes vistas según el tipo de usuario:",
-                items: [
-                    "Administrador: Gestión completa del sistema.",
-                    "Usuario de presupuestos: Carga y edición de presupuestos, ya sea mediante importación de archivos CSV o entrada manual línea por línea.",
-                    "Revisor de presupuestos: Revisión, aceptación, modificación o rechazo de presupuestos. Además, puede asignar prioridades que alteran visualmente las líneas según su importancia y recalculan los totales en tiempo real tras cada modificación.",
-                ],
-            },
+            "En Flops Ingeniería participo en el desarrollo de proyectos digitales, combinando diseño y programación para crear soluciones eficientes y atractivas.",
+            "Trabajo en diseño web, diseño de logotipos, programación web y desarrollo de aplicaciones, así como en proyectos de Kit Digital.",
+            "Además, desarrollo aplicaciones web a medida para entornos educativos y empresariales, programadas desde código, adaptadas a las necesidades específicas de cada organización.",
+            "También desarrollo tiendas online con PrestaShop y páginas web en WordPress, cuidando tanto la experiencia de usuario como el rendimiento y la funcionalidad.",
         ],
         link: "http://www.flopsingenieria.com/",
     },
     {
         date: "Octubre 2024 - Actualidad",
         title: "Tecnico de Sistemas | Flops Ingeniería",
-        description:
-            "Administración de una flota de aproximadamente 400 ordenadores en un colegio. Esto incluye la gestión del inventario mediante GLPI, la administración de dispositivos con Intune for Education, la resolución de incidencias técnicas para alumnos y profesores, y el mantenimiento continuo de los equipos. Además, gestiono las redes del instituto, incluyendo la configuración y administración de VLANs, SSIDs y puntos de acceso, asegurando una conectividad eficiente y segura para toda la comunidad educativa.",
-        description2:
-            "Desarrollo de una aplicación en Python para la descarga masiva de datos de operadoras de telefonía fija de los colegios. La aplicación se ejecuta automáticamente cada mañana y guarda los archivos generados en un OneDrive compartido, permitiendo que el personal de secretaría acceda a la información de manera rápida y eficiente. Este proyecto mejora la productividad, reduce errores manuales y asegura la disponibilidad diaria de los datos.",
+        description: [
+            "En Flops Ingeniería desempeño funciones como Técnico de Sistemas, prestando soporte tecnológico a la cooperativa Grupo Sorolla Educación, concretamente en el centro educativo La Devesa School (Elche).",
+            "Me encargo de la resolución de incidencias técnicas tanto a alumnos, desde 4º de Primaria (cuando adquieren su primer portátil) hasta 2º de Bachillerato, como a profesores y al resto de personal del centro.",
+            "Todo el soporte se gestiona dentro del entorno Microsoft, asegurando el correcto funcionamiento de equipos, usuarios y servicios.",
+            "Además, realizo la gestión de inventario y activos mediante GLPI, la creación de scripts para la optimización, automatización y mejora del rendimiento de los equipos, y el mantenimiento de la red del centro.",
+            "Anualmente participo, junto a mis compañeros de Flops Ingeniería, en el despliegue de dispositivos tanto en mi centro como en los otros centros de la cooperativa Grupo Sorolla Educación, distribuidos por toda la Comunidad Valenciana, realizando la recogida y evaluación de equipos para su devolución al renting, así como la entrega y puesta en marcha de nuevos dispositivos para los alumnos.",
+            "También soy responsable de la gestión y mantenimiento de las pantallas interactivas presentes en todas las aulas, desde Educación Infantil (2 años) hasta 2º de Bachillerato, garantizando su correcto funcionamiento en el día a día educativo.",
+        ],
         link: "http://www.flopsingenieria.com/",
     },
     {
@@ -50,12 +50,19 @@ const EXPERIENCE = [
 ];
 ---
 
-<ol class="relative border-s border-gray-200 ml-3">
-    {
-        EXPERIENCE.map((experience, index) => (
-            <li class="mb-10 ms-4">
-                <ExperienceItem {...experience} />
-            </li>
-        ))
-    }
+<ol class="relative space-y-8">
+	<!-- Línea vertical central -->
+	<div class="absolute left-6 top-0 bottom-0 w-1 bg-gradient-to-b from-cyan-500 via-violet-500 to-pink-500 shadow-lg shadow-cyan-500/50"></div>
+	
+	{
+		EXPERIENCE.map((experience, index) => (
+			<li class="relative pl-20">
+				<!-- Punto en la línea -->
+				<div class="absolute left-0 top-2 w-12 h-12 rounded-full border-2 border-cyan-400 bg-black shadow-lg shadow-cyan-500/60 flex items-center justify-center group/dot hover:border-violet-400 hover:shadow-violet-500/60 transition-all duration-300">
+					<div class="w-3 h-3 rounded-full bg-gradient-to-br from-cyan-400 to-violet-400"></div>
+				</div>
+				<ExperienceItem {...experience} />
+			</li>
+		))
+	}
 </ol>

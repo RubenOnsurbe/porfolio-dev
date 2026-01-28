@@ -1,0 +1,26 @@
+---
+export interface Props {
+    title: string;
+    description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<div
+    class="group relative p-6 rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/5 hover:from-cyan-500/10 hover:to-violet-500/10 transition-all duration-300 hover:border-cyan-400/30 hover:shadow-xl hover:shadow-cyan-500/20 animate-fade-in"
+>
+    <!-- Título -->
+    <h3
+        class="text-xl font-bold bg-gradient-to-r from-cyan-300 via-white to-violet-300 bg-clip-text text-transparent mb-4"
+    >
+        {title}
+    </h3>
+
+    <!-- Descripción -->
+    {
+        description && (
+            <p class="text-sm text-white/80 leading-relaxed">{description}</p>
+        )
+    }
+</div>
