@@ -16,9 +16,10 @@ export default {
 			animation: {
 				'fade-in': 'fadeIn 0.6s ease-in-out',
 				'slide-up': 'slideUp 0.6s ease-out',
-				'float': 'float 3s ease-in-out infinite',
+				'float': 'float 4s ease-in-out infinite',
 				'glow': 'glow 2s ease-in-out infinite',
 				'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+				'shimmer': 'shimmer 2s linear infinite',
 			},
 			keyframes: {
 				fadeIn: {
@@ -36,6 +37,10 @@ export default {
 				glow: {
 					'0%, 100%': { boxShadow: '0 0 5px rgba(14, 165, 233, 0.5)' },
 					'50%': { boxShadow: '0 0 20px rgba(14, 165, 233, 0.8)' },
+				},
+				shimmer: {
+					'0%': { backgroundPosition: '-200% 0' },
+					'100%': { backgroundPosition: '200% 0' },
 				},
 			},
 		},

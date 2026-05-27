@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f1117"/>
+      <stop offset="100%" stop-color="#1a1d2e"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+    <linearGradient id="python" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3776ab"/>
+      <stop offset="100%" stop-color="#ffd43b"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bg)"/>
+
+  <!-- Subtle grid -->
+  <g stroke="#ffffff08" stroke-width="1">
+    <line x1="0" y1="75" x2="800" y2="75"/>
+    <line x1="0" y1="150" x2="800" y2="150"/>
+    <line x1="0" y1="225" x2="800" y2="225"/>
+    <line x1="0" y1="300" x2="800" y2="300"/>
+    <line x1="0" y1="375" x2="800" y2="375"/>
+    <line x1="100" y1="0" x2="100" y2="450"/>
+    <line x1="200" y1="0" x2="200" y2="450"/>
+    <line x1="300" y1="0" x2="300" y2="450"/>
+    <line x1="400" y1="0" x2="400" y2="450"/>
+    <line x1="500" y1="0" x2="500" y2="450"/>
+    <line x1="600" y1="0" x2="600" y2="450"/>
+    <line x1="700" y1="0" x2="700" y2="450"/>
+  </g>
+
+  <!-- Window chrome -->
+  <rect x="60" y="40" width="680" height="370" rx="10" fill="#1e2130" stroke="#ffffff10" stroke-width="1"/>
+  <!-- Titlebar -->
+  <rect x="60" y="40" width="680" height="36" rx="10" fill="#252839"/>
+  <rect x="60" y="58" width="680" height="18" fill="#252839"/>
+  <!-- Window dots -->
+  <circle cx="84" cy="58" r="6" fill="#ff5f57"/>
+  <circle cx="104" cy="58" r="6" fill="#febc2e"/>
+  <circle cx="124" cy="58" r="6" fill="#28c840"/>
+  <!-- Title -->
+  <text x="400" y="63" text-anchor="middle" font-family="monospace" font-size="13" fill="#ffffff60">HTDOCSManager</text>
+
+  <!-- Sidebar -->
+  <rect x="60" y="76" width="180" height="334" fill="#1a1d2e"/>
+  <text x="80" y="106" font-family="monospace" font-size="11" fill="#ffffff40">PROYECTOS</text>
+
+  <!-- Project items in sidebar -->
+  <rect x="72" y="115" width="156" height="28" rx="4" fill="#3b82f620"/>
+  <rect x="76" y="122" width="3" height="14" rx="1" fill="url(#accent)"/>
+  <text x="86" y="133" font-family="monospace" font-size="12" fill="#e2e8f0">mi-proyecto</text>
+
+  <rect x="72" y="149" width="156" height="28" rx="4" fill="transparent"/>
+  <text x="86" y="167" font-family="monospace" font-size="12" fill="#ffffff50">api-rest</text>
+
+  <rect x="72" y="183" width="156" height="28" rx="4" fill="transparent"/>
+  <text x="86" y="201" font-family="monospace" font-size="12" fill="#ffffff50">portfolio</text>
+
+  <rect x="72" y="217" width="156" height="28" rx="4" fill="transparent"/>
+  <text x="86" y="235" font-family="monospace" font-size="12" fill="#ffffff50">tienda-online</text>
+
+  <!-- Main panel -->
+  <rect x="240" y="76" width="500" height="334" fill="#161822"/>
+
+  <!-- Main panel header -->
+  <rect x="240" y="76" width="500" height="44" fill="#1e2130"/>
+  <text x="260" y="102" font-family="monospace" font-size="13" fill="#e2e8f0" font-weight="bold">mi-proyecto</text>
+  <text x="380" y="102" font-family="monospace" font-size="11" fill="#ffffff30">htdocs/mi-proyecto</text>
+
+  <!-- Action buttons -->
+  <rect x="560" y="84" width="80" height="28" rx="6" fill="url(#accent)"/>
+  <text x="600" y="102" text-anchor="middle" font-family="monospace" font-size="11" fill="white" font-weight="bold">▶ VS Code</text>
+
+  <rect x="648" y="84" width="80" height="28" rx="6" fill="#ffffff10" stroke="#ffffff20" stroke-width="1"/>
+  <text x="688" y="102" text-anchor="middle" font-family="monospace" font-size="11" fill="#ffffff80">⚙ Deploy</text>
+
+  <!-- File list -->
+  <text x="260" y="144" font-family="monospace" font-size="10" fill="#ffffff30">ARCHIVOS</text>
+
+  <g font-family="monospace" font-size="12">
+    <text x="268" y="168" fill="#ffd43b">📄</text>
+    <text x="290" y="168" fill="#e2e8f0">index.php</text>
+    <text x="268" y="192" fill="#3b82f6">📁</text>
+    <text x="290" y="192" fill="#e2e8f0">src/</text>
+    <text x="268" y="216" fill="#3b82f6">📁</text>
+    <text x="290" y="216" fill="#e2e8f0">assets/</text>
+    <text x="268" y="240" fill="#ffd43b">📄</text>
+    <text x="290" y="240" fill="#e2e8f0">config.php</text>
+  </g>
+
+  <!-- Terminal section -->
+  <rect x="240" y="268" width="500" height="142" rx="0" fill="#0d0f1a"/>
+  <rect x="240" y="268" width="500" height="22" fill="#1e2130"/>
+  <text x="255" y="283" font-family="monospace" font-size="10" fill="#ffffff40">TERMINAL</text>
+
+  <text x="255" y="310" font-family="monospace" font-size="11" fill="#28c840">$</text>
+  <text x="268" y="310" font-family="monospace" font-size="11" fill="#e2e8f0"> python htdocs_manager.py</text>
+  <text x="255" y="330" font-family="monospace" font-size="11" fill="#ffffff50">✔ Proyecto desplegado en htdocs/mi-proyecto</text>
+  <text x="255" y="350" font-family="monospace" font-size="11" fill="#ffffff50">✔ Abriendo VS Code...</text>
+  <text x="255" y="370" font-family="monospace" font-size="11" fill="#3b82f6">▌</text>
+
+  <!-- Python badge -->
+  <rect x="630" y="390" width="90" height="24" rx="12" fill="#3776ab30" stroke="#3776ab60" stroke-width="1"/>
+  <text x="675" y="406" text-anchor="middle" font-family="monospace" font-size="10" fill="#ffd43b">🐍 Python</text>
+</svg>

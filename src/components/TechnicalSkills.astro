@@ -1,31 +1,114 @@
 ---
+import { Icon } from "astro-icon/components";
+
 const skills = {
     frontend: [
         {
             name: "Angular",
-            description:
-                "Implementé complejas interfaces de usuario con Angular para proyectos corporativos.",
-            experience: "1 año",
+            icon: "simple-icons:angular",
+            desc: "Interfaces de usuario para proyectos corporativos.",
         },
         {
             name: "Astro",
-            description:
-                "Desarrollé sitios web estáticos con Astro, un nuevo marco de trabajo para la web moderna.",
-            experience: "6 meses",
+            icon: "simple-icons:astro",
+            desc: "Sitios web estáticos y portfolios modernos.",
+        },
+        {
+            name: "React",
+            icon: "simple-icons:react",
+            desc: "Componentes reutilizables y SPAs.",
+        },
+        {
+            name: "TypeScript",
+            icon: "simple-icons:typescript",
+            desc: "Tipado estático en proyectos frontend y backend.",
+        },
+        {
+            name: "HTML / CSS",
+            icon: "simple-icons:html5",
+            desc: "Maquetación semántica y estilos responsivos.",
+        },
+        {
+            name: "TailwindCSS",
+            icon: "simple-icons:tailwindcss",
+            desc: "Estilos utilitarios y diseño de interfaces.",
+        },
+        {
+            name: "WordPress",
+            icon: "simple-icons:wordpress",
+            desc: "Desarrollo de sitios web y personalización de temas.",
+        },
+        {
+            name: "Elementor",
+            icon: "simple-icons:elementor",
+            desc: "Maquetación visual avanzada en WordPress.",
         },
     ],
     backend: [
         {
             name: "Laravel",
-            description:
-                "Desarrollé aplicaciones web y APIs RESTful con Laravel.",
-            experience: "1 año",
+            icon: "simple-icons:laravel",
+            desc: "Aplicaciones web y APIs RESTful en PHP.",
+        },
+        {
+            name: "Node.js",
+            icon: "simple-icons:nodedotjs",
+            desc: "Servicios backend y scripts de automatización.",
+        },
+        {
+            name: "PHP",
+            icon: "simple-icons:php",
+            desc: "Desarrollo web del lado del servidor.",
+        },
+        {
+            name: "MySQL",
+            icon: "simple-icons:mysql",
+            desc: "Diseño y gestión de bases de datos relacionales.",
+        },
+        {
+            name: "Python",
+            icon: "simple-icons:python",
+            desc: "Scripts, automatización y desarrollo backend.",
+        },
+    ],
+    tecnicas: [
+        {
+            name: "Git / GitHub",
+            icon: "simple-icons:github",
+            desc: "Control de versiones y colaboración en proyectos.",
+        },
+        {
+            name: "Azure",
+            icon: "simple-icons:microsoftazure",
+            desc: "App Service, Blob Storage y Azure Active Directory.",
+        },
+        {
+            name: "Microsoft 365",
+            icon: "simple-icons:microsoft",
+            desc: "Teams y SharePoint en entornos corporativos.",
+        },
+        {
+            name: "Power Automate",
+            icon: "simple-icons:powerautomate",
+            desc: "Automatización de flujos de trabajo y procesos.",
+        },
+        {
+            name: "Linux / Bash",
+            icon: "simple-icons:linux",
+            desc: "Administración de sistemas y scripting.",
+        },
+        {
+            name: "REST APIs",
+            icon: "mdi:api",
+            desc: "Diseño e integración de servicios externos.",
+        },
+        {
+            name: "GLPI",
+            icon: "mdi:ticket-outline",
+            desc: "Gestión de activos, incidencias y helpdesk corporativo.",
         },
     ],
 };
-
-const getImagePath = (framework: string) =>
-    `/frameworks/${framework.toLowerCase()}.webp`;
 ---
 
 <div class="space-y-12">
@@ -36,26 +119,22 @@ const getImagePath = (framework: string) =>
             ></span>
             Frontend
         </h3>
-        <ul class="grid grid-cols-1 md:grid-cols-2 gap-6 list-none">
+        <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 list-none">
             {
                 skills.frontend.map((skill) => (
-                    <li class="group flex flex-col items-start p-6 rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/5 hover:border-primary/30 hover:bg-gradient-to-br hover:from-primary/10 hover:to-white/5 transition-all duration-300 hover:shadow-lg hover:shadow-primary/20">
-                        <div class="relative mb-4 overflow-hidden rounded-xl w-full">
-                            <img
-                                src={getImagePath(skill.name)}
-                                alt={skill.name}
-                                class="w-full h-40 object-contain hover:scale-110 transition-transform duration-300 ease-in-out group-hover:filter group-hover:brightness-110"
+                    <li class="group flex items-start gap-4 p-5 rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/5 hover:border-primary/30 hover:from-primary/5 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
+                        <div class="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 shrink-0 group-hover:border-primary/30 transition-colors">
+                            <Icon
+                                name={skill.icon}
+                                class="w-5 h-5 text-white/70"
                             />
                         </div>
-                        <div class="w-full">
-                            <h4 class="text-xl font-bold bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent mb-2">
+                        <div class="flex-1 min-w-0">
+                            <h4 class="font-bold text-white/90 text-sm mb-1">
                                 {skill.name}
                             </h4>
-                            <p class="text-sm text-white/70 mb-3 leading-relaxed">
-                                {skill.description}
-                            </p>
-                            <p class="text-xs font-semibold text-primary/80 uppercase tracking-wide">
-                                {skill.experience}
+                            <p class="text-xs text-white/45 leading-relaxed">
+                                {skill.desc}
                             </p>
                         </div>
                     </li>
@@ -70,26 +149,58 @@ const getImagePath = (framework: string) =>
             ></span>
             Backend
         </h3>
-        <ul class="grid grid-cols-1 md:grid-cols-2 gap-6 list-none">
+        <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 list-none">
             {
                 skills.backend.map((skill) => (
-                    <li class="group flex flex-col items-start p-6 rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/5 hover:border-secondary/30 hover:bg-gradient-to-br hover:from-secondary/10 hover:to-white/5 transition-all duration-300 hover:shadow-lg hover:shadow-secondary/20">
-                        <div class="relative mb-4 overflow-hidden rounded-xl w-full">
-                            <img
-                                src={getImagePath(skill.name)}
-                                alt={skill.name}
-                                class="w-full h-40 object-contain hover:scale-110 transition-transform duration-300 ease-in-out group-hover:filter group-hover:brightness-110"
+                    <li class="group flex items-start gap-4 p-5 rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/5 hover:border-secondary/30 hover:from-secondary/5 transition-all duration-300 hover:shadow-lg hover:shadow-secondary/10">
+                        <div class="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 shrink-0 group-hover:border-secondary/30 transition-colors">
+                            <Icon
+                                name={skill.icon}
+                                class="w-5 h-5 text-white/70"
                             />
                         </div>
-                        <div class="w-full">
-                            <h4 class="text-xl font-bold bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent mb-2">
+                        <div class="flex-1 min-w-0">
+                            <h4 class="font-bold text-white/90 text-sm mb-1">
                                 {skill.name}
                             </h4>
-                            <p class="text-sm text-white/70 mb-3 leading-relaxed">
-                                {skill.description}
+                            <p class="text-xs text-white/45 leading-relaxed">
+                                {skill.desc}
                             </p>
-                            <p class="text-xs font-semibold text-secondary/80 uppercase tracking-wide">
-                                {skill.experience}
+                        </div>
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+
+    <!-- Técnicas -->
+    <div class="animate-fade-in" style="animation-delay: 0.2s;">
+        <h3 class="text-3xl font-bold mb-8 flex items-center gap-3">
+            <span
+                class="w-1 h-10 bg-gradient-to-b from-blue-400 to-cyan-400 rounded-full"
+            ></span>
+            Técnicas
+            <span
+                class="ml-2 text-xs font-mono font-normal text-blue-400/60 tracking-widest bg-blue-400/5 border border-blue-400/15 px-2 py-0.5 rounded-full"
+                >Microsoft · Azure · DevOps</span
+            >
+        </h3>
+        <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 list-none">
+            {
+                skills.tecnicas.map((skill) => (
+                    <li class="group flex items-start gap-4 p-5 rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/5 hover:border-blue-400/30 hover:from-blue-400/5 transition-all duration-300 hover:shadow-lg hover:shadow-blue-400/10">
+                        <div class="w-10 h-10 flex items-center justify-center rounded-xl bg-white/5 border border-white/10 shrink-0 group-hover:border-blue-400/30 transition-colors">
+                            <Icon
+                                name={skill.icon}
+                                class="w-5 h-5 text-white/70"
+                            />
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h4 class="font-bold text-white/90 text-sm mb-1">
+                                {skill.name}
+                            </h4>
+                            <p class="text-xs text-white/45 leading-relaxed">
+                                {skill.desc}
                             </p>
                         </div>
                     </li>

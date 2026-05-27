@@ -18,6 +18,7 @@ import Turso from "../icons/Turso.astro";
 import Document from "../icons/Document.astro";
 import NextJS from "../icons/NextJS.astro";
 import NodeJS from "../icons/NodeJS.astro";
+import Python from "../icons/Python.astro";
 
 const TAGS = {
     TYPESCRIPT: {
@@ -95,6 +96,11 @@ const TAGS = {
         class: "bg-gradient-to-r from-gray-400/20 to-gray-300/10 border border-gray-400/30 text-white",
         icon: NextJS,
     },
+    PYTHON: {
+        name: "Python",
+        class: "bg-gradient-to-r from-blue-500/20 to-yellow-400/10 border border-blue-400/30 text-white",
+        icon: Python,
+    },
 };
 const PROJECTS = [
     {
@@ -117,76 +123,20 @@ const PROJECTS = [
         ],
     },
     {
-        title: "Promptly",
-        description: "Aplicación web para compartir Prompts estilo Twitter.",
-        image: "/projects/promptly.webp",
-        link: "https://promptly-rdev.vercel.app/",
-        tags: [TAGS.NEXTJS, TAGS.TAILWINDCSS, TAGS.SUPABASE],
-    },
-    {
-        title: "Clon Paint",
+        title: "HTDOCSManager",
         description:
-            "Clon de la aplicación Paint. Desarrollado con JavaScript Nativo.",
-        image: "/projects/paint.webp",
-        link: "https://paint-js-rdev.vercel.app/",
-        github: "https://github.com/RubenOnsurbe/paintJs",
-        tags: [TAGS.HTML, TAGS.JS],
+            "Una aplicación diseñada para gestionar proyectos de desarrollo de forma eficiente. Permite abrirlos instantáneamente en VS Code y automatiza su despliegue en la carpeta de XAMPP, eliminando la necesidad de mover o reconfigurar directorios manualmente y optimizando el flujo de trabajo.",
+        image: "/projects/htdocsmanager.svg",
+        github: "https://github.com/RubenOnsurbe/HTDOCSManager",
+        tags: [TAGS.PYTHON],
     },
     {
-        title: "Tier Maker",
+        title: "Plugin SSO GLPI",
         description:
-            "Aplicación para crear tus propias tier list. Desarrollado con JavaScript Nativo.",
-        image: "/projects/tierMaker.webp",
-        github: "https://github.com/RubenOnsurbe/TierMaker/",
-        link: "https://tier-maker-rdev.vercel.app/",
-        tags: [TAGS.HTML, TAGS.JS],
-    },
-    {
-        title: "Tetris",
-        description: "Tetris creado con JavaScript.",
-        image: "/projects/tetris-rdev.webp",
-        github: "https://github.com/RubenOnsurbe/TetrisRDEV",
-        link: "https://tetris-rdev.vercel.app/",
-        tags: [TAGS.HTML, TAGS.JS],
-    },
-    {
-        title: "En progreso | Clon Spotify",
-        description:
-            "Clon de la web de Spotify con React y TailwindCSS. En progreso...",
-        image: "/projects/spotify.webp",
-        link: "https://spotify-clon-rdev.vercel.app/",
-        github: "https://github.com/RubenOnsurbe/spotify-clon",
-        tags: [TAGS.ASTRO, TAGS.TAILWINDCSS, TAGS.REACT],
-    },
-    {
-        title: "En progreso | InToJobs",
-        description: "Web para la gestion de trabajos. En progreso...",
-        image: "/projects/intojobs.webp",
-        link: "https://intojobs.vercel.app/",
-        tags: [TAGS.ASTRO, TAGS.CSS, TAGS.JS, TAGS.SUPABASE],
-    },
-    {
-        title: "En progreso | travelAgenda",
-        description: "Web para la gestión de viajes. En progreso...",
-        image: "/projects/travelAgenda.webp",
-        link: "https://travelagenda.vercel.app/",
-        tags: [TAGS.ASTRO, TAGS.CSS, TAGS.JS, TAGS.SUPABASE],
-    },
-    {
-        title: "Traductor",
-        description: "Traductor de texto. Desarrollado con React y TypeScript.",
-        image: "/projects/traductor.webp",
-        link: "https://traductor-ruben.vercel.app/",
-        github: "https://github.com/RubenOnsurbe/translator-ruben",
-        tags: [TAGS.REACT, TAGS.TYPESCRIPT],
-    },
-    {
-        title: "En progreso | Chat Ruben",
-        description: "Web de mensajería. En progreso...",
-        image: "/projects/mensajeria.webp",
-        link: "https://chat-ruben.vercel.app/",
-        github: "https://github.com/RubenOnsurbe/chat-ruben",
-        tags: [TAGS.HTML, TAGS.CSS, TAGS.JS, TAGS.TURSO, TAGS.NODEJS],
+            "Plugin desarrollado para GLPI que integra autenticación Single Sign-On (SSO) mediante Microsoft Entra ID (Azure AD). Permite un acceso centralizado y seguro con las credenciales del Tenant corporativo, automatizando además el aprovisionamiento y la gestión de cuentas de usuario mediante el mapeo de grupos y ofreciendo un panel de administración flexible para la personalización de directivas internas.",
+        image: "/projects/glpi-sso.svg",
+        github: "https://github.com/RubenOnsurbe",
+        tags: [TAGS.PHP],
     },
 ];
 ---
@@ -205,7 +155,7 @@ const PROJECTS = [
                 back,
                 documentation,
             }) => (
-                <article class="flex flex-col space-y-4 p-4 rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/5 hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 animate-fade-in group">
+                <article class="tilt-card spotlight-card flex flex-col space-y-4 p-4 rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/5 hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 animate-fade-in group">
                     <div class="relative flex flex-col items-center gap-4 transition duration-500 ease-in-out transform shadow-xl overflow-clip rounded-xl border border-white/10 hover:border-primary/30 bg-gradient-to-br from-white/10 to-white/5">
                         <!-- Skeleton loader -->
                         <div class="skeleton absolute inset-0 bg-gradient-to-r from-white/5 via-white/10 to-white/5 animate-pulse"></div>

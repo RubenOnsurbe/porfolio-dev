@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f1117"/>
+      <stop offset="100%" stop-color="#1a1d2e"/>
+    </linearGradient>
+    <linearGradient id="azure" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0078d4"/>
+      <stop offset="100%" stop-color="#50e6ff"/>
+    </linearGradient>
+    <linearGradient id="success" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#107c10"/>
+      <stop offset="100%" stop-color="#54b054"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bg)"/>
+
+  <!-- Subtle grid -->
+  <g stroke="#ffffff06" stroke-width="1">
+    <line x1="0" y1="90" x2="800" y2="90"/>
+    <line x1="0" y1="180" x2="800" y2="180"/>
+    <line x1="0" y1="270" x2="800" y2="270"/>
+    <line x1="0" y1="360" x2="800" y2="360"/>
+    <line x1="160" y1="0" x2="160" y2="450"/>
+    <line x1="320" y1="0" x2="320" y2="450"/>
+    <line x1="480" y1="0" x2="480" y2="450"/>
+    <line x1="640" y1="0" x2="640" y2="450"/>
+  </g>
+
+  <!-- Glow blob -->
+  <ellipse cx="400" cy="225" rx="280" ry="160" fill="#0078d4" opacity="0.04"/>
+
+  <!-- Window chrome -->
+  <rect x="60" y="40" width="680" height="370" rx="10" fill="#1e2130" stroke="#ffffff10" stroke-width="1"/>
+  <rect x="60" y="40" width="680" height="36" rx="10" fill="#252839"/>
+  <rect x="60" y="58" width="680" height="18" fill="#252839"/>
+  <circle cx="84" cy="58" r="6" fill="#ff5f57"/>
+  <circle cx="104" cy="58" r="6" fill="#febc2e"/>
+  <circle cx="124" cy="58" r="6" fill="#28c840"/>
+  <text x="400" y="63" text-anchor="middle" font-family="monospace" font-size="13" fill="#ffffff60">GLPI — Plugin SSO · Microsoft Entra ID</text>
+
+  <!-- Top bar in app -->
+  <rect x="60" y="76" width="680" height="40" fill="#1a1f35"/>
+  <!-- GLPI logo text -->
+  <text x="90" y="101" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#0078d4">GLPI</text>
+  <text x="136" y="101" font-family="Arial, sans-serif" font-size="11" fill="#ffffff30">Service Desk</text>
+
+  <!-- User badge top right -->
+  <rect x="590" y="84" width="140" height="26" rx="13" fill="#0078d420" stroke="#0078d450" stroke-width="1"/>
+  <circle cx="607" cy="97" r="8" fill="#0078d4"/>
+  <text x="619" y="101" font-family="monospace" font-size="10" fill="#50e6ff">ruben@contoso.com</text>
+
+  <!-- Left sidebar -->
+  <rect x="60" y="116" width="160" height="294" fill="#161925"/>
+  <text x="80" y="142" font-family="monospace" font-size="10" fill="#ffffff30">NAVEGACIÓN</text>
+  <rect x="68" y="150" width="144" height="26" rx="4" fill="#0078d415"/>
+  <rect x="72" y="157" width="3" height="12" rx="1" fill="url(#azure)"/>
+  <text x="82" y="167" font-family="monospace" font-size="11" fill="#50e6ff">SSO Config</text>
+  <text x="80" y="198" font-family="monospace" font-size="11" fill="#ffffff40">Usuarios</text>
+  <text x="80" y="224" font-family="monospace" font-size="11" fill="#ffffff40">Grupos</text>
+  <text x="80" y="250" font-family="monospace" font-size="11" fill="#ffffff40">Directivas</text>
+  <text x="80" y="276" font-family="monospace" font-size="11" fill="#ffffff40">Logs</text>
+
+  <!-- Main content area -->
+  <rect x="220" y="116" width="520" height="294" fill="#13151f"/>
+
+  <!-- Section title -->
+  <text x="240" y="148" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#e2e8f0">Configuración Microsoft Entra ID</text>
+  <rect x="240" y="154" width="60" height="2" rx="1" fill="url(#azure)"/>
+
+  <!-- Config fields -->
+  <text x="240" y="182" font-family="monospace" font-size="10" fill="#ffffff40">TENANT ID</text>
+  <rect x="240" y="188" width="460" height="28" rx="4" fill="#1e2130" stroke="#0078d430" stroke-width="1"/>
+  <text x="252" y="206" font-family="monospace" font-size="11" fill="#ffffff60">a1b2c3d4-xxxx-xxxx-xxxx-************</text>
+
+  <text x="240" y="232" font-family="monospace" font-size="10" fill="#ffffff40">CLIENT ID</text>
+  <rect x="240" y="238" width="460" height="28" rx="4" fill="#1e2130" stroke="#0078d430" stroke-width="1"/>
+  <text x="252" y="256" font-family="monospace" font-size="11" fill="#ffffff60">e5f6a7b8-xxxx-xxxx-xxxx-************</text>
+
+  <!-- Group mapping -->
+  <text x="240" y="288" font-family="monospace" font-size="10" fill="#ffffff40">MAPEO DE GRUPOS</text>
+  <rect x="240" y="294" width="220" height="26" rx="4" fill="#1e2130" stroke="#ffffff10" stroke-width="1"/>
+  <text x="252" y="311" font-family="monospace" font-size="11" fill="#ffffff60">IT-Admins  →  Técnicos</text>
+  <rect x="470" y="294" width="230" height="26" rx="4" fill="#1e2130" stroke="#ffffff10" stroke-width="1"/>
+  <text x="482" y="311" font-family="monospace" font-size="11" fill="#ffffff60">Helpdesk  →  Agentes</text>
+
+  <!-- Status bar -->
+  <rect x="220" y="360" width="520" height="50" fill="#0d1020"/>
+  <!-- Auth flow indicator -->
+  <g font-family="monospace" font-size="10">
+    <rect x="240" y="374" width="60" height="18" rx="9" fill="url(#success)"/>
+    <text x="270" y="386" text-anchor="middle" fill="white" font-size="9">ACTIVO</text>
+    <text x="312" y="386" fill="#ffffff50">Usuario autenticado vía SSO ·</text>
+    <text x="452" y="386" fill="#50e6ff">Entra ID</text>
+    <text x="500" y="386" fill="#ffffff50">· Token válido</text>
+    <!-- Lock icon -->
+    <text x="660" y="386" fill="#0078d4" font-size="14">🔐</text>
+  </g>
+
+  <!-- Flow diagram at bottom right -->
+  <circle cx="310" cy="330" r="16" fill="#0078d420" stroke="#0078d460" stroke-width="1"/>
+  <text x="310" y="334" text-anchor="middle" font-family="monospace" font-size="9" fill="#50e6ff">User</text>
+  <line x1="326" y1="330" x2="354" y2="330" stroke="#0078d460" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <polygon points="354,326 362,330 354,334" fill="#0078d460"/>
+  <rect x="362" y="314" width="52" height="32" rx="6" fill="#0078d420" stroke="#0078d460" stroke-width="1"/>
+  <text x="388" y="329" text-anchor="middle" font-family="monospace" font-size="8" fill="#50e6ff">Entra</text>
+  <text x="388" y="339" text-anchor="middle" font-family="monospace" font-size="8" fill="#50e6ff">ID</text>
+  <line x1="414" y1="330" x2="442" y2="330" stroke="#54b05460" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <polygon points="442,326 450,330 442,334" fill="#54b05460"/>
+  <rect x="450" y="314" width="52" height="32" rx="6" fill="#10611020" stroke="#54b05460" stroke-width="1"/>
+  <text x="476" y="329" text-anchor="middle" font-family="monospace" font-size="8" fill="#54b054">Token</text>
+  <text x="476" y="339" text-anchor="middle" font-family="monospace" font-size="8" fill="#54b054">JWT</text>
+  <line x1="502" y1="330" x2="530" y2="330" stroke="#54b05460" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <polygon points="530,326 538,330 530,334" fill="#54b05460"/>
+  <circle cx="554" cy="330" r="16" fill="#10611020" stroke="#54b05460" stroke-width="1"/>
+  <text x="554" y="334" text-anchor="middle" font-family="monospace" font-size="9" fill="#54b054">GLPI</text>
+</svg>

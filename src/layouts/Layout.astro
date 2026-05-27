@@ -24,23 +24,143 @@ const { title, description } = Astro.props;
 		<title>{title}</title>
 		<ViewTransitions />
 	</head>
-	<body class="bg-black text-white min-h-screen">
-		<div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
-			<div
-				class="absolute -top-40 -right-40 w-80 h-80 bg-cyan-500/20 rounded-full blur-3xl animate-pulse-slow"
+	<body class="bg-[#050810] text-white min-h-screen">
+		<!-- Cursor sci-fi scanner -->
+		<div id="crosshair" class="crosshair" aria-hidden="true">
+			<svg
+				class="ch-svg"
+				viewBox="-28 -28 56 56"
+				width="56"
+				height="56"
+				xmlns="http://www.w3.org/2000/svg"
 			>
+				<!-- Outer rotating ring -->
+				<circle
+					class="ch-outer-ring"
+					cx="0"
+					cy="0"
+					r="20"
+					fill="none"
+					stroke="rgba(14,165,233,0.3)"
+					stroke-width="0.7"
+					stroke-dasharray="6 3"></circle>
+				<!-- Inner ring -->
+				<circle
+					class="ch-inner-ring"
+					cx="0"
+					cy="0"
+					r="12"
+					fill="none"
+					stroke="rgba(14,165,233,0.18)"
+					stroke-width="0.5"
+					stroke-dasharray="2 5"></circle>
+				<!-- Corner brackets -->
+				<path
+					class="ch-brackets"
+					d="M-20,-14 L-20,-20 L-14,-20"
+					fill="none"
+					stroke="rgba(14,165,233,0.8)"
+					stroke-width="1"
+					stroke-linecap="round"></path>
+				<path
+					class="ch-brackets"
+					d="M14,-20 L20,-20 L20,-14"
+					fill="none"
+					stroke="rgba(14,165,233,0.8)"
+					stroke-width="1"
+					stroke-linecap="round"></path>
+				<path
+					class="ch-brackets"
+					d="M20,14 L20,20 L14,20"
+					fill="none"
+					stroke="rgba(14,165,233,0.8)"
+					stroke-width="1"
+					stroke-linecap="round"></path>
+				<path
+					class="ch-brackets"
+					d="M-14,20 L-20,20 L-20,14"
+					fill="none"
+					stroke="rgba(14,165,233,0.8)"
+					stroke-width="1"
+					stroke-linecap="round"></path>
+				<!-- Crosshair lines with gap -->
+				<line
+					x1="-20"
+					y1="0"
+					x2="-5"
+					y2="0"
+					stroke="rgba(14,165,233,0.5)"
+					stroke-width="0.7"></line>
+				<line
+					x1="5"
+					y1="0"
+					x2="20"
+					y2="0"
+					stroke="rgba(14,165,233,0.5)"
+					stroke-width="0.7"></line>
+				<line
+					x1="0"
+					y1="-20"
+					x2="0"
+					y2="-5"
+					stroke="rgba(14,165,233,0.5)"
+					stroke-width="0.7"></line>
+				<line
+					x1="0"
+					y1="5"
+					x2="0"
+					y2="20"
+					stroke="rgba(14,165,233,0.5)"
+					stroke-width="0.7"></line>
+				<!-- Center dot pulsing -->
+				<circle
+					class="ch-dot-pulse"
+					cx="0"
+					cy="0"
+					r="3"
+					fill="none"
+					stroke="rgba(14,165,233,0.25)"
+					stroke-width="0.7"></circle>
+				<circle cx="0" cy="0" r="1.2" fill="#0ea5e9"></circle>
+				<!-- Scan line -->
+				<line
+					class="ch-scan"
+					x1="-20"
+					y1="-20"
+					x2="20"
+					y2="-20"
+					stroke="rgba(14,165,233,0.4)"
+					stroke-width="0.5"></line>
+			</svg>
+			<div class="ch-coords">
+				<span id="ch-x">X:0000</span>
+				<span id="ch-y">Y:0000</span>
 			</div>
-			<div
-				class="absolute -bottom-40 -left-40 w-80 h-80 bg-violet-500/20 rounded-full blur-3xl animate-pulse-slow"
-				style="animation-delay: 2s;"
-			>
-			</div>
-			<div
-				class="absolute top-1/2 left-1/2 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl animate-pulse-slow"
-				style="animation-delay: 1s;"
-			>
-			</div>
+			<div class="ch-label" id="ch-label">SCAN</div>
 		</div>
+
+		<!-- Scroll progress bar -->
+		<div
+			id="scroll-progress"
+			class="fixed top-0 left-0 h-[2px] z-50 bg-gradient-to-r from-cyan-400 via-violet-400 to-pink-400"
+			style="width:0%;transition:width 0.1s linear"
+		>
+		</div>
+
+		<!-- Cursor glow -->
+		<div
+			id="cursor-glow"
+			class="fixed pointer-events-none z-0 rounded-full opacity-0"
+			style="width:480px;height:480px;background:radial-gradient(circle,rgba(14,165,233,0.07) 0%,transparent 70%);transform:translate(-50%,-50%);transition:opacity 0.3s;top:0;left:0"
+		>
+		</div>
+
+		<!-- Scan line -->
+		<div class="scan-line"></div>
+
+		<!-- Canvas particle network -->
+		<canvas id="bg-canvas" class="fixed inset-0 -z-10"></canvas>
+
 		<div class="relative z-10 flex flex-col min-h-screen">
 			<Header />
 			<main class="flex-1">
@@ -48,10 +168,10 @@ const { title, description } = Astro.props;
 			</main>
 			<Footer />
 		</div>
+
 		<style is:global>
 			:root {
-				color-scheme: light dark;
-				color: white;
+				color-scheme: dark;
 			}
 			html {
 				font-family: "Onest Variable", system-ui, sans-serif;
@@ -66,6 +186,186 @@ const { title, description } = Astro.props;
 					transition: none !important;
 				}
 			}
+
+			/* ---- Scroll reveal ---- */
+			.reveal,
+			.reveal-left,
+			.reveal-right {
+				transition:
+					opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1),
+					transform 0.95s cubic-bezier(0.16, 1, 0.3, 1);
+			}
+			.reveal {
+				opacity: 0;
+				transform: translateY(90px) scale(0.96);
+			}
+			.reveal-left {
+				opacity: 0;
+				transform: translateX(-90px);
+			}
+			.reveal-right {
+				opacity: 0;
+				transform: translateX(90px);
+			}
+			.reveal.visible,
+			.reveal-left.visible,
+			.reveal-right.visible {
+				opacity: 1;
+				transform: none;
+			}
+
+			/* ---- Glitch text ---- */
+			.glitch {
+				position: relative;
+				display: inline-block;
+			}
+			.glitch::before,
+			.glitch::after {
+				content: attr(data-text);
+				position: absolute;
+				inset: 0;
+				background: transparent;
+			}
+			.glitch::before {
+				color: #22d3ee;
+				animation: glitch1 6s infinite linear;
+				clip-path: polygon(0 0, 100% 0, 100% 40%, 0 40%);
+			}
+			.glitch::after {
+				color: #a78bfa;
+				animation: glitch2 6s infinite linear;
+				clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+			}
+			@keyframes glitch1 {
+				0%,
+				88%,
+				100% {
+					transform: translate(0);
+					opacity: 0;
+				}
+				90% {
+					transform: translate(-3px, -1px);
+					opacity: 1;
+				}
+				91% {
+					transform: translate(2px, 1px);
+					opacity: 1;
+				}
+				92% {
+					transform: translate(0);
+					opacity: 0;
+				}
+			}
+			@keyframes glitch2 {
+				0%,
+				88%,
+				100% {
+					transform: translate(0);
+					opacity: 0;
+				}
+				89% {
+					transform: translate(3px, 1px);
+					opacity: 1;
+				}
+				90.5% {
+					transform: translate(-2px, -1px);
+					opacity: 1;
+				}
+				92% {
+					transform: translate(0);
+					opacity: 0;
+				}
+			}
+
+			/* ---- Typing cursor ---- */
+			.type-cursor::after {
+				content: "|";
+				animation: blink 1s step-end infinite;
+				color: #0ea5e9;
+				font-weight: 100;
+			}
+			@keyframes blink {
+				0%,
+				100% {
+					opacity: 1;
+				}
+				50% {
+					opacity: 0;
+				}
+			}
+
+			/* ---- 3D tilt card ---- */
+			.tilt-card {
+				transform-style: preserve-3d;
+				will-change: transform;
+			}
+
+			/* ---- Neon glow ---- */
+			@keyframes neon {
+				0%,
+				100% {
+					box-shadow:
+						0 0 6px rgba(14, 165, 233, 0.4),
+						0 0 14px rgba(14, 165, 233, 0.1);
+				}
+				50% {
+					box-shadow:
+						0 0 14px rgba(14, 165, 233, 0.6),
+						0 0 28px rgba(14, 165, 233, 0.2);
+				}
+			}
+			.neon-glow {
+				animation: neon 3s ease-in-out infinite;
+			}
+
+			/* ---- Scan line ---- */
+			.scan-line {
+				position: fixed;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 2px;
+				background: linear-gradient(
+					90deg,
+					transparent,
+					rgba(14, 165, 233, 0.12),
+					transparent
+				);
+				animation: scan 10s linear infinite;
+				pointer-events: none;
+				z-index: 1;
+			}
+			@keyframes scan {
+				0% {
+					top: -2px;
+				}
+				100% {
+					top: 100vh;
+				}
+			}
+
+			/* ---- Photo HUD scan ---- */
+			.photo-scan {
+				animation: photo-scan-sweep 4s ease-in-out infinite;
+			}
+			@keyframes photo-scan-sweep {
+				0% {
+					top: 0%;
+					opacity: 0;
+				}
+				5% {
+					opacity: 1;
+				}
+				90% {
+					opacity: 0.7;
+				}
+				100% {
+					top: 100%;
+					opacity: 0;
+				}
+			}
+
+			/* ---- Shared keyframes ---- */
 			@keyframes fadeIn {
 				from {
 					opacity: 0;
@@ -84,6 +384,582 @@ const { title, description } = Astro.props;
 					opacity: 1;
 				}
 			}
+			@keyframes float {
+				0%,
+				100% {
+					transform: translateY(0);
+				}
+				50% {
+					transform: translateY(-8px);
+				}
+			}
+
+			/* ---- Custom cursor sci-fi scanner ---- */
+			* {
+				cursor: none !important;
+			}
+			.crosshair {
+				position: fixed;
+				top: 0;
+				left: 0;
+				pointer-events: none;
+				z-index: 99999;
+				transform: translate(-50%, -50%);
+				opacity: 0;
+				transition: opacity 0.3s;
+			}
+			.crosshair.visible {
+				opacity: 1;
+			}
+			.ch-svg {
+				display: block;
+			}
+			.ch-outer-ring {
+				animation: ch-spin 6s linear infinite;
+				transform-origin: center;
+			}
+			.ch-inner-ring {
+				animation: ch-spin-rev 4s linear infinite;
+				transform-origin: center;
+			}
+			.ch-dot-pulse {
+				animation: ch-pulse 1.8s ease-in-out infinite;
+				transform-origin: center;
+			}
+			.ch-scan {
+				animation: ch-scan-move 2s ease-in-out infinite;
+				transform-origin: center;
+			}
+			.crosshair.hovering .ch-brackets {
+				stroke: #a78bfa;
+			}
+			.crosshair.hovering .ch-outer-ring {
+				stroke: rgba(167, 139, 250, 0.6);
+			}
+			.crosshair.hovering .ch-inner-ring {
+				stroke: rgba(167, 139, 250, 0.4);
+			}
+			.crosshair.clicking .ch-svg {
+				filter: brightness(2);
+			}
+			.crosshair.clicking .ch-outer-ring {
+				animation-duration: 0.4s;
+			}
+			.ch-coords {
+				position: absolute;
+				top: 36px;
+				left: 36px;
+				display: flex;
+				flex-direction: column;
+				gap: 1px;
+				font-family: monospace;
+				font-size: 7px;
+				color: rgba(14, 165, 233, 0.55);
+				white-space: nowrap;
+				letter-spacing: 0.05em;
+				line-height: 1.4;
+			}
+			.crosshair.hovering .ch-coords {
+				color: rgba(167, 139, 250, 0.8);
+			}
+			.ch-label {
+				position: absolute;
+				bottom: 36px;
+				right: 36px;
+				font-family: monospace;
+				font-size: 6px;
+				color: rgba(14, 165, 233, 0.4);
+				letter-spacing: 0.15em;
+				animation: ch-blink 2s step-end infinite;
+			}
+			@keyframes ch-spin {
+				to {
+					transform: rotate(360deg);
+				}
+			}
+			@keyframes ch-spin-rev {
+				to {
+					transform: rotate(-360deg);
+				}
+			}
+			@keyframes ch-pulse {
+				0%,
+				100% {
+					r: 4;
+					opacity: 0.3;
+				}
+				50% {
+					r: 7;
+					opacity: 0.05;
+				}
+			}
+			@keyframes ch-scan-move {
+				0% {
+					transform: translateY(-30px);
+					opacity: 0.6;
+				}
+				100% {
+					transform: translateY(30px);
+					opacity: 0;
+				}
+			}
+			@keyframes ch-blink {
+				0%,
+				100% {
+					opacity: 0.5;
+				}
+				50% {
+					opacity: 0;
+				}
+			}
+			::-webkit-scrollbar {
+				width: 5px;
+			}
+			::-webkit-scrollbar-track {
+				background: transparent;
+			}
+			::-webkit-scrollbar-thumb {
+				background: linear-gradient(180deg, #0ea5e9, #8b5cf6, #ec4899);
+				border-radius: 3px;
+			}
+
+			/* ---- Card spotlight ---- */
+			.spotlight-card {
+				position: relative;
+				overflow: hidden;
+			}
+			.spotlight-card::after {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background: radial-gradient(
+					circle 240px at var(--sx, -9999px) var(--sy, -9999px),
+					rgba(14, 165, 233, 0.1),
+					transparent 70%
+				);
+				pointer-events: none;
+				z-index: 2;
+			}
+
+			/* ---- Magnetic ---- */
+			.magnetic {
+				transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1) !important;
+			}
+
+			/* ---- Click spark ---- */
+			.click-spark {
+				position: fixed;
+				width: 5px;
+				height: 5px;
+				border-radius: 50%;
+				pointer-events: none;
+				z-index: 9999;
+				animation: spark-fly 0.65s ease-out forwards;
+			}
+			@keyframes spark-fly {
+				0% {
+					transform: translate(-50%, -50%) scale(1.5);
+					opacity: 1;
+				}
+				100% {
+					transform: translate(
+							calc(-50% + var(--dx)),
+							calc(-50% + var(--dy))
+						)
+						scale(0);
+					opacity: 0;
+				}
+			}
+
+			/* ---- Marquee ---- */
+			.marquee-outer {
+				overflow: hidden;
+				mask-image: linear-gradient(
+					90deg,
+					transparent,
+					black 8%,
+					black 92%,
+					transparent
+				);
+				-webkit-mask-image: linear-gradient(
+					90deg,
+					transparent,
+					black 8%,
+					black 92%,
+					transparent
+				);
+			}
+			.marquee-inner {
+				display: flex;
+				width: max-content;
+				animation: marquee 40s linear infinite;
+			}
+			.marquee-inner:hover {
+				animation-play-state: paused;
+			}
+			@keyframes marquee {
+				from {
+					transform: translateX(0);
+				}
+				to {
+					transform: translateX(-50%);
+				}
+			}
+
+			/* ---- Scramble text (no flash on load) ---- */
+			[data-scramble] {
+				display: inline-block;
+			}
+
+			/* ---- Hero badge chips ---- */
+			.hero-badge {
+				display: inline-flex;
+				align-items: center;
+				gap: 6px;
+				padding: 4px 10px;
+				border-radius: 999px;
+				font-size: 11px;
+				font-weight: 600;
+				border: 1px solid rgba(255, 255, 255, 0.08);
+				background: rgba(255, 255, 255, 0.04);
+				color: rgba(255, 255, 255, 0.55);
+				letter-spacing: 0.05em;
+				transition: all 0.2s;
+			}
+			.hero-badge:hover {
+				border-color: rgba(14, 165, 233, 0.4);
+				color: rgba(255, 255, 255, 0.85);
+				background: rgba(14, 165, 233, 0.06);
+			}
 		</style>
+
+		<script>
+			// ===== Custom sci-fi scanner cursor =====
+			(function () {
+				const ch = document.getElementById(
+					"crosshair",
+				) as HTMLElement | null;
+				const elX = document.getElementById(
+					"ch-x",
+				) as HTMLElement | null;
+				const elY = document.getElementById(
+					"ch-y",
+				) as HTMLElement | null;
+				const elLabel = document.getElementById(
+					"ch-label",
+				) as HTMLElement | null;
+				if (!ch) return;
+				let cx = -999,
+					cy = -999,
+					tx = -999,
+					ty = -999;
+				const labels = ["SCAN", "LOCK", "TRACK", "READ", "PING"];
+				let labelIdx = 0;
+				setInterval(() => {
+					if (elLabel)
+						elLabel.textContent =
+							labels[labelIdx++ % labels.length];
+				}, 2000);
+				document.addEventListener(
+					"mousemove",
+					(e: MouseEvent) => {
+						tx = e.clientX;
+						ty = e.clientY;
+						ch.classList.add("visible");
+						if (elX)
+							elX.textContent =
+								"X:" + String(e.clientX).padStart(4, "0");
+						if (elY)
+							elY.textContent =
+								"Y:" + String(e.clientY).padStart(4, "0");
+					},
+					{ passive: true },
+				);
+				document.addEventListener("mouseleave", () =>
+					ch.classList.remove("visible"),
+				);
+				document.addEventListener("mouseenter", () =>
+					ch.classList.add("visible"),
+				);
+				document.addEventListener("mousedown", () =>
+					ch.classList.add("clicking"),
+				);
+				document.addEventListener("mouseup", () =>
+					ch.classList.remove("clicking"),
+				);
+				const hoverSels =
+					'a, button, [role="button"], input, textarea, select, label, .magnetic';
+				document.addEventListener("mouseover", (e) => {
+					if ((e.target as Element).closest(hoverSels)) {
+						ch.classList.add("hovering");
+						if (elLabel) elLabel.textContent = "SELECT";
+					}
+				});
+				document.addEventListener("mouseout", (e) => {
+					if ((e.target as Element).closest(hoverSels))
+						ch.classList.remove("hovering");
+				});
+				const lerp = (a: number, b: number, t: number) =>
+					a + (b - a) * t;
+				const loop = () => {
+					cx = lerp(cx, tx, 0.14);
+					cy = lerp(cy, ty, 0.14);
+					ch.style.left = cx + "px";
+					ch.style.top = cy + "px";
+					requestAnimationFrame(loop);
+				};
+				loop();
+			})();
+
+			// ===== Particle network =====
+			let mx = -9999,
+				my = -9999;
+			const canvas = document.getElementById(
+				"bg-canvas",
+			) as HTMLCanvasElement | null;
+			if (canvas) {
+				const ctx = canvas.getContext("2d")!;
+				const resize = () => {
+					canvas.width = window.innerWidth;
+					canvas.height = window.innerHeight;
+				};
+				resize();
+				window.addEventListener("resize", resize, { passive: true });
+
+				const COLORS = ["14,165,233", "139,92,246", "236,72,153"];
+				type P = {
+					x: number;
+					y: number;
+					vx: number;
+					vy: number;
+					r: number;
+					op: number;
+					c: string;
+				};
+				const pts: P[] = Array.from({ length: 90 }, () => ({
+					x: Math.random() * canvas.width,
+					y: Math.random() * canvas.height,
+					vx: (Math.random() - 0.5) * 0.45,
+					vy: (Math.random() - 0.5) * 0.45,
+					r: Math.random() * 1.5 + 0.4,
+					op: Math.random() * 0.4 + 0.15,
+					c: COLORS[Math.floor(Math.random() * 3)],
+				}));
+
+				const draw = () => {
+					ctx.clearRect(0, 0, canvas.width, canvas.height);
+					for (const p of pts) {
+						p.x += p.vx;
+						p.y += p.vy;
+						if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+						if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+						ctx.beginPath();
+						ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+						ctx.fillStyle = `rgba(${p.c},${p.op})`;
+						ctx.fill();
+					}
+					for (let i = 0; i < pts.length; i++) {
+						for (let j = i + 1; j < pts.length; j++) {
+							const d = Math.hypot(
+								pts[i].x - pts[j].x,
+								pts[i].y - pts[j].y,
+							);
+							if (d < 140) {
+								ctx.beginPath();
+								ctx.moveTo(pts[i].x, pts[i].y);
+								ctx.lineTo(pts[j].x, pts[j].y);
+								ctx.strokeStyle = `rgba(14,165,233,${(1 - d / 140) * 0.13})`;
+								ctx.lineWidth = 0.5;
+								ctx.stroke();
+							}
+						}
+						const dm = Math.hypot(pts[i].x - mx, pts[i].y - my);
+						if (dm < 180) {
+							ctx.beginPath();
+							ctx.moveTo(pts[i].x, pts[i].y);
+							ctx.lineTo(mx, my);
+							ctx.strokeStyle = `rgba(139,92,246,${(1 - dm / 180) * 0.45})`;
+							ctx.lineWidth = 0.7;
+							ctx.stroke();
+						}
+					}
+					requestAnimationFrame(draw);
+				};
+				draw();
+			}
+
+			// ===== Cursor glow + mouse =====
+			window.addEventListener(
+				"mousemove",
+				(e) => {
+					mx = e.clientX;
+					my = e.clientY;
+					const g = document.getElementById("cursor-glow");
+					if (g) {
+						g.style.left = e.clientX + "px";
+						g.style.top = e.clientY + "px";
+						g.style.opacity = "1";
+					}
+				},
+				{ passive: true },
+			);
+			window.addEventListener("mouseleave", () => {
+				mx = -9999;
+				my = -9999;
+			});
+
+			// ===== Scroll progress =====
+			window.addEventListener(
+				"scroll",
+				() => {
+					const bar = document.getElementById("scroll-progress");
+					if (bar) {
+						const p =
+							(window.scrollY /
+								(document.documentElement.scrollHeight -
+									window.innerHeight)) *
+							100;
+						bar.style.width = p + "%";
+					}
+				},
+				{ passive: true },
+			);
+
+			// ===== Scroll reveal =====
+			const ro = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((e) => {
+						if (e.isIntersecting) {
+							e.target.classList.add("visible");
+							ro.unobserve(e.target);
+						}
+					});
+				},
+				{ threshold: 0.07, rootMargin: "0px 0px -60px 0px" },
+			);
+			document
+				.querySelectorAll(".reveal, .reveal-left, .reveal-right")
+				.forEach((el) => ro.observe(el));
+
+			// ===== 3D tilt cards =====
+			document.querySelectorAll(".tilt-card").forEach((card) => {
+				const el = card as HTMLElement;
+				el.addEventListener("mouseenter", () => {
+					el.style.transition = "transform 0.1s ease";
+				});
+				el.addEventListener("mousemove", (e: MouseEvent) => {
+					const r = el.getBoundingClientRect();
+					const rx = -((e.clientY - r.top) / r.height - 0.5) * 12;
+					const ry = ((e.clientX - r.left) / r.width - 0.5) * 12;
+					el.style.transform = `perspective(700px) rotateX(${rx}deg) rotateY(${ry}deg) scale(1.02)`;
+				});
+				el.addEventListener("mouseleave", () => {
+					el.style.transition = "transform 0.4s ease";
+					el.style.transform =
+						"perspective(700px) rotateX(0deg) rotateY(0deg) scale(1)";
+				});
+			});
+
+			// ===== Click spark burst =====
+			const SPARK = [
+				"#0ea5e9",
+				"#8b5cf6",
+				"#ec4899",
+				"#22d3ee",
+				"#a78bfa",
+				"#f472b6",
+			];
+			window.addEventListener("click", (e) => {
+				for (let i = 0; i < 10; i++) {
+					const s = document.createElement("div");
+					s.className = "click-spark";
+					const angle = (i / 10) * Math.PI * 2 + Math.random() * 0.5;
+					const dist = 25 + Math.random() * 55;
+					s.style.cssText = `left:${e.clientX}px;top:${e.clientY}px;background:${SPARK[i % 6]};--dx:${(Math.cos(angle) * dist).toFixed(1)}px;--dy:${(Math.sin(angle) * dist).toFixed(1)}px`;
+					document.body.appendChild(s);
+					setTimeout(() => s.remove(), 750);
+				}
+			});
+
+			// ===== Card spotlight =====
+			document.querySelectorAll(".spotlight-card").forEach((card) => {
+				const el = card as HTMLElement;
+				el.addEventListener("mousemove", (e: MouseEvent) => {
+					const r = el.getBoundingClientRect();
+					el.style.setProperty("--sx", e.clientX - r.left + "px");
+					el.style.setProperty("--sy", e.clientY - r.top + "px");
+				});
+				el.addEventListener("mouseleave", () => {
+					el.style.setProperty("--sx", "-9999px");
+					el.style.setProperty("--sy", "-9999px");
+				});
+			});
+
+			// ===== Magnetic elements =====
+			document.querySelectorAll(".magnetic").forEach((btn) => {
+				const el = btn as HTMLElement;
+				el.addEventListener("mousemove", (e: MouseEvent) => {
+					const r = el.getBoundingClientRect();
+					const dx = (e.clientX - (r.left + r.width / 2)) * 0.28;
+					const dy = (e.clientY - (r.top + r.height / 2)) * 0.28;
+					el.style.transform = `translate(${dx}px, ${dy}px)`;
+				});
+				el.addEventListener("mouseleave", () => {
+					el.style.transform = "";
+				});
+			});
+
+			// ===== Text scramble on load =====
+			const SC =
+				"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&!<>/\\|";
+			function scramble(el: HTMLElement, delay = 0) {
+				const orig = el.textContent || "";
+				const frames = 65;
+				let f = 0;
+				setTimeout(() => {
+					const tick = () => {
+						const p = f / frames;
+						el.textContent = [...orig]
+							.map((c, i) => {
+								if (c === " " || c === "\n") return c;
+								return i / orig.length < p
+									? c
+									: SC[Math.floor(Math.random() * SC.length)];
+							})
+							.join("");
+						if (++f <= frames) requestAnimationFrame(tick);
+						else el.textContent = orig;
+					};
+					requestAnimationFrame(tick);
+				}, delay);
+			}
+			document
+				.querySelectorAll("[data-scramble]")
+				.forEach((el, i) => scramble(el as HTMLElement, i * 180));
+
+			// ===== Hero typewriter =====
+			const heroTyped = document.getElementById(
+				"hero-typed",
+			) as HTMLElement | null;
+			if (heroTyped) {
+				const fullText = heroTyped.textContent?.trim() || "";
+				heroTyped.textContent = "";
+				heroTyped.classList.add("type-cursor");
+				let ti = 0;
+				const typeNext = () => {
+					if (ti < fullText.length) {
+						heroTyped.textContent += fullText[ti++];
+						setTimeout(typeNext, 22 + Math.random() * 18);
+					} else {
+						// keep blinking cursor for 3s then remove it
+						setTimeout(
+							() => heroTyped.classList.remove("type-cursor"),
+							3000,
+						);
+					}
+				};
+				setTimeout(typeNext, 900);
+			}
+		</script>
 	</body>
 </html>

@@ -23,68 +23,495 @@ if (
 	title="Porfolio de Ruben - Desarrollador y programador Web"
 	description="Conoce a Ruben Onsurbe, Desarrollador Web que busca trabajo en Madrid, Espa�a. Conoce sus proyectos y habilidades."
 >
-	<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
-		<!-- Hero Section -->
-		<SectionContainer id="sobre-mi" class="mb-20">
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-				<div>
-					<h1
-						class="text-4xl md:text-5xl font-bold mb-6 text-white leading-tight"
+	<!-- Panel 1: Hero -->
+	<div
+		class="snap-panel min-h-screen flex flex-col justify-center overflow-hidden"
+	>
+		<div class="max-w-6xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-24 pb-8">
+			<!-- Hero Section -->
+			<SectionContainer id="sobre-mi">
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+					<div>
+						<!-- Online status -->
+						<div
+							class="flex items-center gap-2 mb-5 font-mono text-xs select-none"
+						>
+							<span class="relative flex h-2 w-2">
+								<span
+									class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"
+								></span>
+								<span
+									class="relative inline-flex rounded-full h-2 w-2 bg-green-400"
+								></span>
+							</span>
+							<span class="text-green-400 tracking-widest"
+								>ONLINE</span
+							>
+							<span class="text-white/20 mx-1">·</span>
+							<span class="text-white/40 tracking-wider"
+								>DISPONIBLE PARA TRABAJAR</span
+							>
+						</div>
+						<h1
+							class="text-4xl md:text-5xl font-bold mb-6 text-white leading-tight"
+						>
+							<span data-scramble>Bienvenido a</span><br /><span
+								class="text-cyan-400 glitch"
+								data-text="mi portfolio">mi portfolio</span
+							>
+						</h1>
+						<p class="text-lg text-white/80 mb-4 font-medium">
+							Ruben, {age} años • Elche, España
+						</p>
+						<p
+							id="hero-typed"
+							class="text-xl text-white/70 mb-8 leading-relaxed"
+						>
+							Técnico Informático y Desarrollador Web apasionado
+							por crear soluciones digitales innovadoras.
+						</p>
+						<div class="flex flex-wrap gap-3">
+							<a
+								href="https://www.linkedin.com/in/ruben-onsurbe-heredia-a7895a253/"
+								target="_blank"
+								rel="noopener"
+								class="magnetic px-6 py-3 bg-cyan-500/20 border border-cyan-400/50 text-white rounded-lg hover:bg-cyan-500/30 transition font-medium neon-glow"
+							>
+								LinkedIn
+							</a>
+							<a
+								href="https://github.com/RubenOnsurbe"
+								target="_blank"
+								rel="noopener"
+								class="magnetic px-6 py-3 bg-violet-500/20 border border-violet-400/50 text-white rounded-lg hover:bg-violet-500/30 transition font-medium"
+							>
+								GitHub
+							</a>
+							<a
+								href="mailto:ruben.onsurbe@gmail.com"
+								class="magnetic px-6 py-3 bg-pink-500/20 border border-pink-400/50 text-white rounded-lg hover:bg-pink-500/30 transition font-medium"
+							>
+								Email
+							</a>
+						</div>
+					</div>
+					<div
+						class="relative hidden md:flex items-center justify-center"
+						style="height:480px"
 					>
-						Bienvenido a<br /><span class="text-cyan-400"
-							>mi portfolio</span
+						<!-- Glow background -->
+						<div
+							class="absolute w-72 h-96 bg-gradient-to-br from-cyan-500/20 to-violet-500/20 rounded-3xl blur-3xl"
+							style="animation: float 4s ease-in-out infinite"
 						>
-					</h1>
-					<p class="text-lg text-white/80 mb-4 font-medium">
-						Ruben, {age} años • Elche, España
-					</p>
-					<p class="text-xl text-white/70 mb-8 leading-relaxed">
-						Técnico Informático y Desarrollador Web apasionado por
-						crear soluciones digitales innovadoras.
-					</p>
-					<div class="flex flex-wrap gap-3">
-						<a
-							href="https://www.linkedin.com/in/ruben-onsurbe-heredia-a7895a253/"
-							target="_blank"
-							rel="noopener"
-							class="px-6 py-3 bg-cyan-500/20 border border-cyan-400/50 text-white rounded-lg hover:bg-cyan-500/30 transition font-medium"
+						</div>
+						<!-- Photo with HUD overlay -->
+						<div
+							class="absolute w-56 h-72 top-4 right-4 rounded-2xl overflow-hidden border-2 border-cyan-400/50 shadow-2xl shadow-cyan-500/20"
+							style="animation: float 4s ease-in-out infinite; animation-delay: 0.5s"
 						>
-							LinkedIn
-						</a>
-						<a
-							href="https://github.com/RubenOnsurbe"
-							target="_blank"
-							rel="noopener"
-							class="px-6 py-3 bg-violet-500/20 border border-violet-400/50 text-white rounded-lg hover:bg-violet-500/30 transition font-medium"
+							<img
+								src="rdev.jpg"
+								alt="Ruben"
+								class="w-full h-full object-cover"
+							/>
+							<!-- HUD overlay -->
+							<div class="absolute inset-0 pointer-events-none">
+								<!-- Corner brackets -->
+								<div
+									class="absolute top-2 left-2 w-5 h-5 border-t border-l border-cyan-400/80"
+								>
+								</div>
+								<div
+									class="absolute top-2 right-2 w-5 h-5 border-t border-r border-cyan-400/80"
+								>
+								</div>
+								<div
+									class="absolute bottom-8 left-2 w-5 h-5 border-b border-l border-cyan-400/80"
+								>
+								</div>
+								<div
+									class="absolute bottom-8 right-2 w-5 h-5 border-b border-r border-cyan-400/80"
+								>
+								</div>
+								<!-- Scan line -->
+								<div
+									class="photo-scan absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent"
+								>
+								</div>
+								<!-- Status bar -->
+								<div
+									class="absolute bottom-0 left-0 right-0 px-2.5 py-1 bg-black/50 backdrop-blur-sm font-mono text-[8px] flex justify-between items-center"
+								>
+									<span
+										class="text-cyan-400/80 tracking-wider"
+										>R.ONSURBE</span
+									>
+									<span
+										class="text-green-400/90 tracking-widest"
+										>&#9679; ID_OK</span
+									>
+								</div>
+							</div>
+						</div>
+						<!-- Azure card (only lg+ where column is wide enough) -->
+						<div
+							class="hidden lg:block absolute top-4 left-0 w-[200px] bg-[#0d1117]/90 backdrop-blur-md rounded-xl overflow-hidden shadow-2xl shadow-blue-500/15"
+							style="animation: float 4s ease-in-out infinite; animation-delay: 0.2s; border: 1px solid rgba(59,130,246,0.3);"
 						>
-							GitHub
-						</a>
-						<a
-							href="mailto:ruben.onsurbe@gmail.com"
-							class="px-6 py-3 bg-pink-500/20 border border-pink-400/50 text-white rounded-lg hover:bg-pink-500/30 transition font-medium"
+							<div
+								class="flex items-center gap-2 px-3 py-2 bg-[#161b22] border-b border-white/5"
+							>
+								<svg
+									width="12"
+									height="12"
+									viewBox="0 0 18 18"
+									fill="none"
+									><path
+										d="M9 2L2 14h5.5l1.5-3h0L9 2z"
+										fill="#50b0f0"></path><path
+										d="M9 2l7 12h-5.5L9 11h0L9 2z"
+										fill="#0078d4"></path><path
+										d="M4.5 14h9L9 11z"
+										fill="#50b0f0"
+										opacity=".7"></path></svg
+								>
+								<span
+									class="text-white/40 text-[10px] font-sans tracking-wide"
+									>Azure CLI</span
+								>
+								<span
+									class="ml-auto w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"
+								></span>
+							</div>
+							<div
+								class="p-3 font-mono text-[10px] leading-5 space-y-0.5"
+							>
+								<div>
+									<span class="text-blue-400">$</span><span
+										class="text-white/50"
+									>
+										az account show</span
+									>
+								</div>
+								<div class="pl-2 text-white/30">
+									name: <span class="text-green-400/70"
+										>ruben-portfolio</span
+									>
+								</div>
+								<div class="pl-2 text-white/30">
+									region: <span class="text-cyan-400/70"
+										>West Europe</span
+									>
+								</div>
+								<div class="pl-2 text-white/30">
+									state: <span class="text-green-400"
+										>Enabled ✓</span
+									>
+								</div>
+								<div class="mt-1.5">
+									<span class="text-blue-400">$</span><span
+										class="text-white/50"
+									>
+										az devops</span
+									><span class="type-cursor text-white/0"
+										>_</span
+									>
+								</div>
+							</div>
+						</div>
+						<!-- Terminal card -->
+						<div
+							class="absolute bottom-0 left-0 w-[240px] bg-[#0d1117]/90 backdrop-blur-md rounded-xl overflow-hidden shadow-2xl shadow-cyan-500/15"
+							style="animation: float 4s ease-in-out infinite; animation-delay: 1s; border: 1px solid rgba(14,165,233,0.25);"
 						>
-							Email
-						</a>
+							<div
+								class="flex items-center gap-2 px-3 py-2 bg-[#161b22] border-b border-white/5"
+							>
+								<span
+									class="w-2.5 h-2.5 rounded-full bg-[#ff5f57]"
+								></span>
+								<span
+									class="w-2.5 h-2.5 rounded-full bg-[#febc2e]"
+								></span>
+								<span
+									class="w-2.5 h-2.5 rounded-full bg-[#28c840]"
+								></span>
+								<span
+									class="mx-auto text-white/35 text-[10px] font-sans tracking-wide"
+									>portfolio.js</span
+								>
+							</div>
+							<div
+								class="p-3 font-mono text-[11px] leading-5 space-y-0.5"
+							>
+								<div>
+									<span class="text-[#7ee787]">const</span
+									><span class="text-white"> dev </span><span
+										class="text-[#ff7b72]">=</span
+									><span class="text-white"> {}</span>
+									<div class="pl-4">
+										<span class="text-[#79c0ff]">name</span
+										><span class="text-white">: </span><span
+											class="text-[#a5d6ff]"
+											>&quot;Ruben Onsurbe&quot;</span
+										><span class="text-white">,</span>
+									</div>
+									<div class="pl-4">
+										<span class="text-[#79c0ff]">role</span
+										><span class="text-white">: </span><span
+											class="text-[#a5d6ff]"
+											>&quot;Web Developer&quot;</span
+										><span class="text-white">,</span>
+									</div>
+									<div class="pl-4">
+										<span class="text-[#79c0ff]"
+											>status</span
+										><span class="text-white">: </span><span
+											class="text-[#7ee787]"
+											>&quot;open to work&quot;</span
+										><span class="text-white">,</span>
+									</div>
+									<div class="pl-4">
+										<span class="text-[#79c0ff]"
+											>passion</span
+										><span class="text-white">: </span><span
+											class="text-[#a5d6ff]"
+											>&quot;building things&quot;</span
+										>
+									</div>
+									<div><span class="text-white"></span></div>
+								</div>
+								<div class="pt-1 flex items-center gap-1">
+									<span class="text-white/20">|</span><span
+										class="type-cursor text-white/0">_</span
+									>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
+			</SectionContainer>
+		</div><!-- /max-w-6xl -->
+
+		<!-- Tech stack marquee -->
+		<div class="w-full py-5 mt-auto border-t border-white/5">
+			<div class="marquee-outer">
 				<div
-					class="relative h-96 md:h-full hidden md:flex items-center justify-center"
+					class="marquee-inner items-center gap-10 text-[12px] font-mono text-white/25 select-none"
 				>
-					<div
-						class="w-72 h-96 bg-gradient-to-br from-cyan-500/20 to-violet-500/20 rounded-3xl blur-3xl animate-pulse-slow"
+					<span class="flex items-center gap-10 shrink-0"
+						><span class="text-cyan-400/30">◈</span><span
+							class="hover:text-white/60 transition-colors cursor-default tracking-widest uppercase"
+							>TypeScript</span
+						></span
 					>
-					</div>
-					<img
-						src="rdev.jpg"
-						alt="Ruben"
-						class="absolute w-64 h-80 rounded-2xl border-2 border-cyan-400/50 shadow-2xl shadow-cyan-500/20 object-cover"
-					/>
+					<span class="flex items-center gap-10 shrink-0"
+						><span class="text-cyan-400/30">◈</span><span
+							class="hover:text-white/60 transition-colors cursor-default tracking-widest uppercase"
+							>React</span
+						></span
+					>
+					<span class="flex items-center gap-10 shrink-0"
+						><span class="text-cyan-400/30">◈</span><span
+							class="hover:text-white/60 transition-colors cursor-default tracking-widest uppercase"
+							>Angular</span
+						></span
+					>
+					<span class="flex items-center gap-10 shrink-0"
+						><span class="text-cyan-400/30">◈</span><span
+							class="hover:text-white/60 transition-colors cursor-default tracking-widest uppercase"
+							>Laravel</span
+						></span
+					>
+					<span class="flex items-center gap-10 shrink-0"
+						><span class="text-cyan-400/30">◈</span><span
+							class="hover:text-white/60 transition-colors cursor-default tracking-widest uppercase"
+							>Node.js</span
+						></span
+					>
+					<span class="flex items-center gap-10 shrink-0"
+						><span class="text-cyan-400/30">◈</span><span
+							class="hover:text-white/60 transition-colors cursor-default tracking-widest uppercase"
+							>Next.js</span
+						></span
+					>
+					<span class="flex items-center gap-10 shrink-0"
+						><span class="text-cyan-400/30">◈</span><span
+							class="hover:text-white/60 transition-colors cursor-default tracking-widest uppercase"
+							>TailwindCSS</span
+						></span
+					>
+					<span class="flex items-center gap-10 shrink-0"
+						><span class="text-cyan-400/30">◈</span><span
+							class="hover:text-white/60 transition-colors cursor-default tracking-widest uppercase"
+							>Astro</span
+						></span
+					>
+					<span class="flex items-center gap-10 shrink-0"
+						><span class="text-cyan-400/30">◈</span><span
+							class="hover:text-white/60 transition-colors cursor-default tracking-widest uppercase"
+							>MySQL</span
+						></span
+					>
+					<span class="flex items-center gap-10 shrink-0"
+						><span class="text-cyan-400/30">◈</span><span
+							class="hover:text-white/60 transition-colors cursor-default tracking-widest uppercase"
+							>PHP</span
+						></span
+					>
+					<span class="flex items-center gap-10 shrink-0"
+						><span class="text-cyan-400/30">◈</span><span
+							class="hover:text-white/60 transition-colors cursor-default tracking-widest uppercase"
+							>Supabase</span
+						></span
+					>
+					<span class="flex items-center gap-10 shrink-0"
+						><span class="text-cyan-400/30">◈</span><span
+							class="hover:text-white/60 transition-colors cursor-default tracking-widest uppercase"
+							>JavaScript</span
+						></span
+					>
+					<span class="flex items-center gap-10 shrink-0"
+						><span class="text-cyan-400/30">◈</span><span
+							class="hover:text-white/60 transition-colors cursor-default tracking-widest uppercase"
+							>HTML5</span
+						></span
+					>
+					<span class="flex items-center gap-10 shrink-0"
+						><span class="text-cyan-400/30">◈</span><span
+							class="hover:text-white/60 transition-colors cursor-default tracking-widest uppercase"
+							>CSS3</span
+						></span
+					>
+					<span class="flex items-center gap-10 shrink-0"
+						><span class="text-cyan-400/30">◈</span><span
+							class="hover:text-white/60 transition-colors cursor-default tracking-widest uppercase"
+							>TypeScript</span
+						></span
+					>
+					<span class="flex items-center gap-10 shrink-0"
+						><span class="text-cyan-400/30">◈</span><span
+							class="hover:text-white/60 transition-colors cursor-default tracking-widest uppercase"
+							>React</span
+						></span
+					>
+					<span class="flex items-center gap-10 shrink-0"
+						><span class="text-cyan-400/30">◈</span><span
+							class="hover:text-white/60 transition-colors cursor-default tracking-widest uppercase"
+							>Angular</span
+						></span
+					>
+					<span class="flex items-center gap-10 shrink-0"
+						><span class="text-cyan-400/30">◈</span><span
+							class="hover:text-white/60 transition-colors cursor-default tracking-widest uppercase"
+							>Laravel</span
+						></span
+					>
+					<span class="flex items-center gap-10 shrink-0"
+						><span class="text-cyan-400/30">◈</span><span
+							class="hover:text-white/60 transition-colors cursor-default tracking-widest uppercase"
+							>Node.js</span
+						></span
+					>
+					<span class="flex items-center gap-10 shrink-0"
+						><span class="text-cyan-400/30">◈</span><span
+							class="hover:text-white/60 transition-colors cursor-default tracking-widest uppercase"
+							>Next.js</span
+						></span
+					>
+					<span class="flex items-center gap-10 shrink-0"
+						><span class="text-cyan-400/30">◈</span><span
+							class="hover:text-white/60 transition-colors cursor-default tracking-widest uppercase"
+							>TailwindCSS</span
+						></span
+					>
+					<span class="flex items-center gap-10 shrink-0"
+						><span class="text-cyan-400/30">◈</span><span
+							class="hover:text-white/60 transition-colors cursor-default tracking-widest uppercase"
+							>Astro</span
+						></span
+					>
+					<span class="flex items-center gap-10 shrink-0"
+						><span class="text-cyan-400/30">◈</span><span
+							class="hover:text-white/60 transition-colors cursor-default tracking-widest uppercase"
+							>MySQL</span
+						></span
+					>
+					<span class="flex items-center gap-10 shrink-0"
+						><span class="text-cyan-400/30">◈</span><span
+							class="hover:text-white/60 transition-colors cursor-default tracking-widest uppercase"
+							>PHP</span
+						></span
+					>
+					<span class="flex items-center gap-10 shrink-0"
+						><span class="text-cyan-400/30">◈</span><span
+							class="hover:text-white/60 transition-colors cursor-default tracking-widest uppercase"
+							>Supabase</span
+						></span
+					>
+					<span class="flex items-center gap-10 shrink-0"
+						><span class="text-cyan-400/30">◈</span><span
+							class="hover:text-white/60 transition-colors cursor-default tracking-widest uppercase"
+							>JavaScript</span
+						></span
+					>
+					<span class="flex items-center gap-10 shrink-0"
+						><span class="text-cyan-400/30">◈</span><span
+							class="hover:text-white/60 transition-colors cursor-default tracking-widest uppercase"
+							>HTML5</span
+						></span
+					>
+					<span class="flex items-center gap-10 shrink-0"
+						><span class="text-cyan-400/30">◈</span><span
+							class="hover:text-white/60 transition-colors cursor-default tracking-widest uppercase"
+							>CSS3</span
+						></span
+					>
+					<span class="flex items-center gap-10 shrink-0"
+						><span class="text-blue-400/30">◈</span><span
+							class="hover:text-white/60 transition-colors cursor-default tracking-widest uppercase"
+							>Azure</span
+						></span
+					>
+					<span class="flex items-center gap-10 shrink-0"
+						><span class="text-blue-400/30">◈</span><span
+							class="hover:text-white/60 transition-colors cursor-default tracking-widest uppercase"
+							>Azure DevOps</span
+						></span
+					>
+					<span class="flex items-center gap-10 shrink-0"
+						><span class="text-blue-400/30">◈</span><span
+							class="hover:text-white/60 transition-colors cursor-default tracking-widest uppercase"
+							>Microsoft 365</span
+						></span
+					>
+					<span class="flex items-center gap-10 shrink-0"
+						><span class="text-blue-400/30">◈</span><span
+							class="hover:text-white/60 transition-colors cursor-default tracking-widest uppercase"
+							>Docker</span
+						></span
+					>
+					<span class="flex items-center gap-10 shrink-0"
+						><span class="text-blue-400/30">◈</span><span
+							class="hover:text-white/60 transition-colors cursor-default tracking-widest uppercase"
+							>Linux</span
+						></span
+					>
+					<span class="flex items-center gap-10 shrink-0"
+						><span class="text-blue-400/30">◈</span><span
+							class="hover:text-white/60 transition-colors cursor-default tracking-widest uppercase"
+							>Git</span
+						></span
+					>
 				</div>
 			</div>
-		</SectionContainer>
+		</div>
+	</div><!-- /snap-panel hero -->
 
-		<!-- Experiencia -->
-		<SectionContainer id="experiencia" class="mb-20">
+	<!-- Panel 2: Experiencia -->
+	<div class="snap-panel min-h-screen flex items-center py-24">
+		<SectionContainer id="experiencia" class="reveal-left">
 			<h2
 				class="text-4xl font-bold mb-12 text-white flex items-center gap-3"
 			>
@@ -95,9 +522,11 @@ if (
 			</h2>
 			<Experience />
 		</SectionContainer>
+	</div><!-- /snap-panel experiencia -->
 
-		<!-- Educación -->
-		<SectionContainer id="educacion" class="mb-20">
+	<!-- Panel 3: Educación -->
+	<div class="snap-panel min-h-screen flex items-center py-24">
+		<SectionContainer id="educacion" class="reveal-right">
 			<h2
 				class="text-4xl font-bold mb-12 text-white flex items-center gap-3"
 			>
@@ -108,9 +537,11 @@ if (
 			</h2>
 			<Education />
 		</SectionContainer>
+	</div><!-- /snap-panel educacion -->
 
-		<!-- Proyectos -->
-		<SectionContainer id="proyectos" class="mb-20">
+	<!-- Panel 4: Proyectos -->
+	<div class="snap-panel min-h-screen flex items-center py-24">
+		<SectionContainer id="proyectos" class="reveal">
 			<h2
 				class="text-4xl font-bold mb-12 text-white flex items-center gap-3"
 			>
@@ -121,9 +552,11 @@ if (
 			</h2>
 			<Projects />
 		</SectionContainer>
+	</div><!-- /snap-panel proyectos -->
 
-		<!-- Habilidades -->
-		<SectionContainer id="habilidades-tecnicas">
+	<!-- Panel 5: Habilidades -->
+	<div class="snap-panel min-h-screen flex items-center py-24">
+		<SectionContainer id="habilidades-tecnicas" class="reveal-right">
 			<h2
 				class="text-4xl font-bold mb-12 text-white flex items-center gap-3"
 			>
@@ -134,5 +567,41 @@ if (
 			</h2>
 			<TechnicalSkills />
 		</SectionContainer>
-	</main>
+	</div><!-- /snap-panel habilidades -->
+
+	<script>
+		// Counter animation for stats
+		document.querySelectorAll("[data-count]").forEach((el) => {
+			const target = parseInt(
+				(el as HTMLElement).dataset.count ?? "0",
+				10,
+			);
+			let current = 0;
+			const step = Math.ceil(target / 40);
+			const tick = () => {
+				current = Math.min(current + step, target);
+				(el as HTMLElement).textContent =
+					current + (target >= 10 ? "+" : "+");
+				if (current < target) setTimeout(tick, 35);
+			};
+			setTimeout(tick, 800);
+		});
+		// Typing effect for hero paragraph
+		const el = document.getElementById("hero-typed");
+		if (el) {
+			const full = el.textContent ?? "";
+			el.textContent = "";
+			el.classList.add("type-cursor");
+			let i = 0;
+			const type = () => {
+				if (i < full.length) {
+					el.textContent += full[i++];
+					setTimeout(type, 28 + Math.random() * 18);
+				} else {
+					setTimeout(() => el.classList.remove("type-cursor"), 1200);
+				}
+			};
+			setTimeout(type, 600);
+		}
+	</script>
 </Layout>
