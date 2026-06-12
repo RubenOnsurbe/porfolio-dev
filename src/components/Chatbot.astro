@@ -1148,5 +1148,17 @@ Puedo informarte sobre su experiencia laboral, proyectos, habilidades técnicas 
         sendMessage();
       }
     });
+    
+    // Global Header Contact Link integration
+    const headerContactLink = document.getElementById('header-contact-link');
+    if (headerContactLink) {
+      headerContactLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (!isOpen) {
+          openChat();
+        }
+        startContactFlow();
+      });
+    }
   })();
 </script>
