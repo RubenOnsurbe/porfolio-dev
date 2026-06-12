@@ -7,6 +7,6 @@ import vercel from "@astrojs/vercel/serverless";
 // https://astro.build/config
 export default defineConfig({
   output: 'hybrid',
-  adapter: vercel({ maxDuration: 120 }),
+  adapter: vercel({ maxDuration: 60 }),
   integrations: [tailwind(), icon()]
 });
