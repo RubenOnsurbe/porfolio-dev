@@ -1,0 +1,190 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="bg-fm" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f1117"/>
+      <stop offset="100%" stop-color="#1a1d2e"/>
+    </linearGradient>
+    <linearGradient id="cyan-fm" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0ea5e9"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </linearGradient>
+    <linearGradient id="violet-fm" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#a78bfa"/>
+    </linearGradient>
+    <linearGradient id="floor-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0.06"/>
+    </linearGradient>
+    <filter id="glow-fm">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bg-fm)"/>
+
+  <!-- Subtle grid -->
+  <g stroke="#ffffff06" stroke-width="1">
+    <line x1="0" y1="90" x2="800" y2="90"/>
+    <line x1="0" y1="180" x2="800" y2="180"/>
+    <line x1="0" y1="270" x2="800" y2="270"/>
+    <line x1="0" y1="360" x2="800" y2="360"/>
+    <line x1="160" y1="0" x2="160" y2="450"/>
+    <line x1="320" y1="0" x2="320" y2="450"/>
+    <line x1="480" y1="0" x2="480" y2="450"/>
+    <line x1="640" y1="0" x2="640" y2="450"/>
+  </g>
+
+  <!-- Glow blob -->
+  <ellipse cx="400" cy="225" rx="280" ry="160" fill="#0ea5e9" opacity="0.04"/>
+
+  <!-- Window chrome -->
+  <rect x="60" y="40" width="680" height="370" rx="10" fill="#1e2130" stroke="#ffffff10" stroke-width="1"/>
+  <rect x="60" y="40" width="680" height="36" rx="10" fill="#252839"/>
+  <rect x="60" y="58" width="680" height="18" fill="#252839"/>
+  <circle cx="84" cy="58" r="6" fill="#ff5f57"/>
+  <circle cx="104" cy="58" r="6" fill="#febc2e"/>
+  <circle cx="124" cy="58" r="6" fill="#28c840"/>
+  <text x="400" y="63" text-anchor="middle" font-family="monospace" font-size="13" fill="#ffffff60">GLPI — Plugin Planos · Floormap Viewer</text>
+
+  <!-- Top bar in app -->
+  <rect x="60" y="76" width="680" height="40" fill="#1a1f35"/>
+  <text x="90" y="101" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#0ea5e9">GLPI</text>
+  <text x="136" y="101" font-family="Arial, sans-serif" font-size="11" fill="#ffffff30">Planos Interactivos</text>
+
+  <!-- Breadcrumb -->
+  <text x="340" y="100" font-family="monospace" font-size="10" fill="#ffffff30">Plugins  /  Planos  /</text>
+  <text x="445" y="100" font-family="monospace" font-size="10" fill="#0ea5e9"> Planta 2</text>
+
+  <!-- Left sidebar -->
+  <rect x="60" y="116" width="150" height="294" fill="#161925"/>
+  <text x="80" y="142" font-family="monospace" font-size="10" fill="#ffffff30">EDIFICIOS</text>
+
+  <!-- Building A - selected -->
+  <rect x="68" y="148" width="134" height="26" rx="4" fill="#0ea5e91a"/>
+  <rect x="72" y="155" width="3" height="12" rx="1" fill="url(#cyan-fm)"/>
+  <text x="82" y="165" font-family="monospace" font-size="11" fill="#22d3ee">Edificio A</text>
+
+  <!-- Floors -->
+  <text x="86" y="192" font-family="monospace" font-size="10" fill="#ffffff50">▸ Planta 0</text>
+  <text x="86" y="213" font-family="monospace" font-size="10" fill="#ffffff50">▸ Planta 1</text>
+  <rect x="80" y="218" width="120" height="18" rx="3" fill="#0ea5e912"/>
+  <text x="86" y="231" font-family="monospace" font-size="10" fill="#0ea5e9">▸ Planta 2  ●</text>
+  <text x="86" y="250" font-family="monospace" font-size="10" fill="#ffffff50">▸ Planta 3</text>
+
+  <text x="80" y="278" font-family="monospace" font-size="10" fill="#ffffff30">EDIFICIOS</text>
+  <text x="86" y="296" font-family="monospace" font-size="10" fill="#ffffff50">Edificio B</text>
+  <text x="86" y="314" font-family="monospace" font-size="10" fill="#ffffff50">Edificio C</text>
+
+  <!-- Main floor plan area -->
+  <rect x="210" y="116" width="530" height="294" fill="#13151f"/>
+
+  <!-- Floor plan background -->
+  <rect x="228" y="128" width="494" height="240" rx="6" fill="url(#floor-grad)" stroke="#0ea5e920" stroke-width="1"/>
+
+  <!-- ── FLOOR PLAN WALLS ── -->
+  <!-- Outer walls -->
+  <rect x="248" y="143" width="454" height="210" rx="2" fill="none" stroke="#0ea5e950" stroke-width="2"/>
+
+  <!-- Internal walls - horizontal -->
+  <line x1="248" y1="218" x2="476" y2="218" stroke="#0ea5e940" stroke-width="1.5"/>
+  <line x1="530" y1="218" x2="702" y2="218" stroke="#0ea5e940" stroke-width="1.5"/>
+  <line x1="248" y1="293" x2="430" y2="293" stroke="#0ea5e940" stroke-width="1.5"/>
+  <line x1="480" y1="293" x2="702" y2="293" stroke="#0ea5e940" stroke-width="1.5"/>
+
+  <!-- Internal walls - vertical -->
+  <line x1="370" y1="143" x2="370" y2="218" stroke="#0ea5e940" stroke-width="1.5"/>
+  <line x1="530" y1="143" x2="530" y2="218" stroke="#0ea5e940" stroke-width="1.5"/>
+  <line x1="430" y1="218" x2="430" y2="353" stroke="#0ea5e940" stroke-width="1.5"/>
+  <line x1="600" y1="218" x2="600" y2="353" stroke="#0ea5e940" stroke-width="1.5"/>
+
+  <!-- Door gaps (small breaks already in walls via separate lines above) -->
+  <!-- Door arc - room 1 -->
+  <path d="M 476 218 Q 476 200 494 200" fill="none" stroke="#0ea5e960" stroke-width="1" stroke-dasharray="3,2"/>
+  <!-- Door arc - room bottom -->
+  <path d="M 430 293 Q 430 275 448 275" fill="none" stroke="#0ea5e960" stroke-width="1" stroke-dasharray="3,2"/>
+  <path d="M 480 293 Q 480 275 462 275" fill="none" stroke="#0ea5e960" stroke-width="1" stroke-dasharray="3,2"/>
+
+  <!-- Room labels -->
+  <text x="298" y="188" text-anchor="middle" font-family="monospace" font-size="9" fill="#ffffff35">Sala Reuniones</text>
+  <text x="298" y="198" text-anchor="middle" font-family="monospace" font-size="9" fill="#ffffff35">A-201</text>
+
+  <text x="448" y="188" text-anchor="middle" font-family="monospace" font-size="9" fill="#ffffff35">Dirección</text>
+  <text x="448" y="198" text-anchor="middle" font-family="monospace" font-size="9" fill="#ffffff35">A-202</text>
+
+  <text x="613" y="188" text-anchor="middle" font-family="monospace" font-size="9" fill="#ffffff35">Sala Servidores</text>
+  <text x="613" y="198" text-anchor="middle" font-family="monospace" font-size="9" fill="#ffffff35">A-203</text>
+
+  <text x="335" y="260" text-anchor="middle" font-family="monospace" font-size="9" fill="#ffffff35">Open Space</text>
+  <text x="335" y="270" text-anchor="middle" font-family="monospace" font-size="9" fill="#ffffff35">A-204</text>
+
+  <text x="512" y="260" text-anchor="middle" font-family="monospace" font-size="9" fill="#ffffff35">Pasillo Central</text>
+
+  <text x="648" y="270" text-anchor="middle" font-family="monospace" font-size="9" fill="#ffffff35">Despacho</text>
+  <text x="648" y="280" text-anchor="middle" font-family="monospace" font-size="9" fill="#ffffff35">A-206</text>
+
+  <!-- ── ACTIVE ASSET PIN (selected) ── -->
+  <!-- Selected room highlight - Sala Servidores -->
+  <rect x="531" y="144" width="170" height="73" rx="2" fill="#0ea5e910" stroke="#0ea5e9" stroke-width="1.5" filter="url(#glow-fm)"/>
+
+  <!-- Asset pin icon -->
+  <circle cx="613" cy="162" r="10" fill="#0ea5e9" opacity="0.9"/>
+  <text x="613" y="166" text-anchor="middle" font-family="monospace" font-size="10" fill="white" font-weight="bold">⬡</text>
+
+  <!-- Asset count badge -->
+  <rect x="555" y="152" width="28" height="14" rx="7" fill="#8b5cf6"/>
+  <text x="569" y="162" text-anchor="middle" font-family="monospace" font-size="8" fill="white">3</text>
+
+  <!-- ── TOOLTIP / INFO CARD ── -->
+  <rect x="490" y="125" width="148" height="68" rx="5" fill="#0d1020" stroke="#0ea5e960" stroke-width="1"/>
+  <rect x="490" y="125" width="148" height="16" rx="5" fill="#0ea5e920"/>
+  <rect x="490" y="133" width="148" height="8" fill="#0ea5e920"/>
+  <text x="498" y="136" font-family="monospace" font-size="9" fill="#22d3ee" font-weight="bold">Sala Servidores A-203</text>
+  <text x="498" y="152" font-family="monospace" font-size="9" fill="#ffffff60">Activos: </text>
+  <text x="538" y="152" font-family="monospace" font-size="9" fill="#0ea5e9">3 equipos</text>
+  <text x="498" y="165" font-family="monospace" font-size="9" fill="#ffffff60">Tickets: </text>
+  <text x="538" y="165" font-family="monospace" font-size="9" fill="#f59e0b">2 abiertos</text>
+  <text x="498" y="178" font-family="monospace" font-size="9" fill="#ffffff60">Responsable: </text>
+  <text x="568" y="178" font-family="monospace" font-size="9" fill="#a78bfa">IT-Admin</text>
+
+  <!-- connector line from tooltip to pin -->
+  <line x1="613" y1="193" x2="613" y2="172" stroke="#0ea5e960" stroke-width="1" stroke-dasharray="3,2"/>
+
+  <!-- ── ASSET DOTS on other rooms ── -->
+  <circle cx="298" cy="180" r="5" fill="#22c55e" opacity="0.8"/>
+  <circle cx="448" cy="183" r="5" fill="#f59e0b" opacity="0.8"/>
+  <circle cx="335" cy="252" r="5" fill="#22c55e" opacity="0.8"/>
+  <circle cx="335" cy="265" r="5" fill="#22c55e" opacity="0.8"/>
+  <circle cx="648" cy="262" r="5" fill="#f59e0b" opacity="0.8"/>
+
+  <!-- ── ZOOM CONTROLS ── -->
+  <rect x="686" y="128" width="30" height="80" rx="5" fill="#1e2130" stroke="#ffffff10" stroke-width="1"/>
+  <line x1="686" y1="168" x2="716" y2="168" stroke="#ffffff15" stroke-width="1"/>
+  <text x="701" y="153" text-anchor="middle" font-family="monospace" font-size="14" fill="#ffffff40">+</text>
+  <text x="701" y="191" text-anchor="middle" font-family="monospace" font-size="14" fill="#ffffff40">−</text>
+
+  <!-- ── STATUS BAR ── -->
+  <rect x="210" y="360" width="530" height="50" fill="#0d1020"/>
+
+  <!-- Legend -->
+  <g font-family="monospace" font-size="9">
+    <circle cx="230" cy="381" r="4" fill="#22c55e"/>
+    <text x="238" y="384" fill="#ffffff50">Sin incidencias</text>
+    <circle cx="330" cy="381" r="4" fill="#f59e0b"/>
+    <text x="338" y="384" fill="#ffffff50">Ticket abierto</text>
+    <circle cx="430" cy="381" r="4" fill="#0ea5e9"/>
+    <text x="438" y="384" fill="#ffffff50">Seleccionado</text>
+
+    <text x="230" y="400" fill="#ffffff30">Planta 2  ·  Edificio A  ·  </text>
+    <text x="354" y="400" fill="#0ea5e9">11 activos registrados</text>
+    <text x="560" y="400" fill="#ffffff20">PHP · GLPI 10.x</text>
+  </g>
+
+  <!-- HUD corner decorations -->
+  <path d="M60,40 L72,40 L72,52" fill="none" stroke="#0ea5e960" stroke-width="1.5"/>
+  <path d="M728,40 L740,40 L740,52" fill="none" stroke="#0ea5e960" stroke-width="1.5"/>
+  <path d="M60,398 L72,398 L72,410" fill="none" stroke="#0ea5e960" stroke-width="1.5"/>
+  <path d="M728,398 L740,398 L740,410" fill="none" stroke="#0ea5e960" stroke-width="1.5"/>
+</svg>

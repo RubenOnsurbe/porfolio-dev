@@ -1,6 +1,7 @@
 ---
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
+import Chatbot from "../components/Chatbot.astro";
 import { ViewTransitions } from "astro:transitions";
 
 import "@fontsource-variable/onest";
@@ -168,6 +169,9 @@ const { title, description } = Astro.props;
 			</main>
 			<Footer />
 		</div>
+
+		<!-- Chatbot widget -->
+		<Chatbot />
 
 		<style is:global>
 			:root {

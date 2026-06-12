@@ -1,0 +1,1152 @@
+---
+// Chatbot component – R.AI v3.0 – WhatsApp Group Chat style with Conversational Contact Form
+---
+
+<!-- ============================================================
+     CHATBOT WIDGET
+     ============================================================ -->
+<div id="chatbot-root" aria-label="Asistente R.AI">
+  <!-- Floating trigger button -->
+  <button
+    id="chatbot-toggle"
+    aria-label="Abrir asistente R.AI"
+    title="R.AI v3.0 – Asistente del portfolio"
+  >
+    <span class="cb-toggle-icon">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.96 9.96 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="8.5" cy="12" r="1" fill="currentColor"/>
+        <circle cx="12" cy="12" r="1" fill="currentColor"/>
+        <circle cx="15.5" cy="12" r="1" fill="currentColor"/>
+      </svg>
+    </span>
+    <span class="cb-toggle-pulse"></span>
+    <span class="cb-toggle-label">R.AI</span>
+  </button>
+
+  <!-- Chat window -->
+  <div id="chatbot-window" class="cb-window" aria-hidden="true">
+    <!-- WhatsApp-style Header -->
+    <div class="cb-header">
+      <div class="cb-header-profile">
+        <div class="cb-avatar-header">
+          <!-- Ruben AI Bot Avatar -->
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="cb-header-info">
+          <span class="cb-header-name">Ruben (Asistente AI)</span>
+          <span class="cb-header-status">
+            <span class="cb-status-dot"></span> en línea
+          </span>
+        </div>
+      </div>
+      <div class="cb-header-right">
+        <button id="chatbot-close" class="cb-close" aria-label="Cerrar">✕</button>
+      </div>
+    </div>
+
+    <!-- HUD sub-bar (keeps sci-fi data aesthetic overlay) -->
+    <div class="cb-subbar">
+      <span class="cb-subbar-item"><span class="cb-subbar-dot green"></span>ONLINE</span>
+      <span class="cb-subbar-item"><span class="cb-subbar-dot violet"></span>PORTFOLIO.AI</span>
+      <span class="cb-subbar-item cb-subbar-model">nex-n2-pro:free</span>
+    </div>
+
+    <!-- Messages (WhatsApp Bubbles container) -->
+    <div id="chatbot-messages" class="cb-messages" role="log" aria-live="polite">
+      <!-- Chat bubbles inserted dynamically by JS -->
+    </div>
+
+    <!-- Thinking indicator (hidden by default) -->
+    <div id="chatbot-thinking" class="cb-thinking" aria-hidden="true">
+      <span class="cb-thinking-dot"></span>
+      <span class="cb-thinking-dot"></span>
+      <span class="cb-thinking-dot"></span>
+      <span class="cb-thinking-label">R.AI ESCRIBIENDO...</span>
+    </div>
+
+    <!-- Input area -->
+    <div class="cb-input-area">
+      <!-- Option Chips (visible during contact form flow) -->
+      <div id="chatbot-options" class="cb-options hidden">
+        <button class="cb-option-btn" data-value="email">📧 Correo electrónico</button>
+        <button class="cb-option-btn" data-value="phone">📞 Teléfono</button>
+        <button class="cb-option-btn cb-option-cancel" data-value="cancel">❌ Cancelar</button>
+      </div>
+
+      <!-- Text typing area -->
+      <div id="chatbot-input-wrapper" class="cb-input-wrapper">
+        <span class="cb-input-prefix">›_</span>
+        <textarea
+          id="chatbot-input"
+          class="cb-input"
+          placeholder="Pregúntame sobre Ruben..."
+          rows="1"
+          aria-label="Mensaje al asistente"
+          maxlength="500"
+        ></textarea>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="cb-actions-wrapper">
+        <button id="chatbot-cancel-flow" class="cb-cancel-flow hidden" title="Cancelar contacto" aria-label="Cancelar contacto">
+          ✕
+        </button>
+        <button id="chatbot-send" class="cb-send" aria-label="Enviar mensaje">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="18" height="18">
+            <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Disclaimer footer -->
+    <div class="cb-disclaimer">
+      Recuerda que este asistente es una IA y puede cometer errores. Para una mejor respuesta, <button id="cb-contact-link" class="cb-contact-link">contacta con Ruben</button>.
+    </div>
+
+    <!-- Corner decorations removed -->
+  </div>
+</div>
+
+<style is:global>
+  /* ====== Root / Variables ====== */
+  #chatbot-root {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 9998;
+    font-family: 'Onest Variable', system-ui, sans-serif;
+  }
+
+  /* ====== Toggle button ====== */
+  #chatbot-toggle {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px 12px 16px;
+    background: rgba(5, 8, 16, 0.9);
+    border: 1px solid rgba(14, 165, 233, 0.5);
+    border-radius: 40px;
+    color: #0ea5e9;
+    cursor: none !important;
+    backdrop-filter: blur(12px);
+    box-shadow:
+      0 0 20px rgba(14, 165, 233, 0.15),
+      inset 0 0 20px rgba(14, 165, 233, 0.03);
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+  #chatbot-toggle::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.08), transparent 60%);
+    border-radius: inherit;
+  }
+  #chatbot-toggle:hover {
+    border-color: rgba(14, 165, 233, 0.8);
+    box-shadow:
+      0 0 30px rgba(14, 165, 233, 0.3),
+      0 0 60px rgba(14, 165, 233, 0.1),
+      inset 0 0 20px rgba(14, 165, 233, 0.06);
+    transform: translateY(-2px);
+  }
+  #chatbot-toggle.open {
+    border-color: rgba(167, 139, 250, 0.6);
+    color: #a78bfa;
+    box-shadow:
+      0 0 20px rgba(167, 139, 250, 0.2),
+      inset 0 0 20px rgba(167, 139, 250, 0.03);
+  }
+
+  .cb-toggle-icon {
+    display: flex;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+  }
+  .cb-toggle-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .cb-toggle-pulse {
+    position: absolute;
+    top: 10px;
+    right: 18px;
+    width: 6px;
+    height: 6px;
+    background: #22c55e;
+    border-radius: 50%;
+    animation: cb-pulse 2s ease-in-out infinite;
+  }
+  @keyframes cb-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
+    50% { opacity: 0.8; transform: scale(1.1); box-shadow: 0 0 0 4px rgba(34,197,94,0); }
+  }
+
+  .cb-toggle-label {
+    font-family: monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    position: relative;
+  }
+
+  /* ====== Chat Window ====== */
+  .cb-window {
+    position: absolute;
+    bottom: calc(100% + 16px);
+    right: 0;
+    width: 390px;
+    max-height: 600px;
+    display: flex;
+    flex-direction: column;
+    background: rgba(10, 14, 26, 0.97);
+    border: 1px solid rgba(14, 165, 233, 0.3);
+    border-radius: 16px;
+    overflow: hidden;
+    backdrop-filter: blur(24px);
+    box-shadow:
+      0 0 0 1px rgba(14, 165, 233, 0.05),
+      0 20px 60px rgba(0, 0, 0, 0.8),
+      0 0 40px rgba(14, 165, 233, 0.1);
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+    pointer-events: none;
+    transition:
+      opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .cb-window.open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: all;
+  }
+
+  /* HUD scan line on window */
+  .cb-window::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.6), transparent);
+    animation: cb-window-scan 4s linear infinite;
+    z-index: 1;
+    pointer-events: none;
+  }
+  @keyframes cb-window-scan {
+    0% { top: 0; opacity: 1; }
+    90% { opacity: 0.5; }
+    100% { top: 100%; opacity: 0; }
+  }
+
+  /* ====== HUD Corner decorations ====== */
+  .cb-corner {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    pointer-events: none;
+    z-index: 10;
+  }
+  .cb-corner-tl { top: 8px; left: 8px; border-top: 1px solid rgba(14, 165, 233, 0.6); border-left: 1px solid rgba(14, 165, 233, 0.6); }
+  .cb-corner-tr { top: 8px; right: 8px; border-top: 1px solid rgba(14, 165, 233, 0.6); border-right: 1px solid rgba(14, 165, 233, 0.6); }
+  .cb-corner-bl { bottom: 8px; left: 8px; border-bottom: 1px solid rgba(14, 165, 233, 0.6); border-left: 1px solid rgba(14, 165, 233, 0.6); }
+  .cb-corner-br { bottom: 8px; right: 8px; border-bottom: 1px solid rgba(14, 165, 233, 0.6); border-right: 1px solid rgba(14, 165, 233, 0.6); }
+
+  /* ====== WhatsApp-Style Header ====== */
+  .cb-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    background: #202c33;
+    border-bottom: 1px solid rgba(14, 165, 233, 0.15);
+  }
+  .cb-header-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .cb-avatar-header {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(14, 165, 233, 0.1);
+    border: 1px solid rgba(14, 165, 233, 0.3);
+    color: #0ea5e9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cb-avatar-header svg {
+    width: 22px;
+    height: 22px;
+  }
+  .cb-header-info {
+    display: flex;
+    flex-direction: column;
+  }
+  .cb-header-name {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #e9edef;
+  }
+  .cb-header-status {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    color: #81c784;
+    font-family: monospace;
+  }
+  .cb-status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #4caf50;
+    box-shadow: 0 0 5px #4caf50;
+    display: inline-block;
+    animation: cb-status-pulse 2s ease-in-out infinite;
+  }
+  @keyframes cb-status-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.9); }
+  }
+
+  .cb-header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .cb-header-tag {
+    font-family: monospace;
+    font-size: 8px;
+    letter-spacing: 0.18em;
+    color: rgba(167, 139, 250, 0.6);
+    background: rgba(167, 139, 250, 0.08);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid rgba(167, 139, 250, 0.15);
+  }
+  .cb-close {
+    width: 24px;
+    height: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 10px;
+    cursor: none !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  .cb-close:hover {
+    border-color: rgba(236, 72, 153, 0.5);
+    color: #ec4899;
+    background: rgba(236, 72, 153, 0.06);
+  }
+
+  /* ====== Sub-bar ====== */
+  .cb-subbar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 5px 16px;
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  }
+  .cb-subbar-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: monospace;
+    font-size: 8px;
+    letter-spacing: 0.12em;
+    color: rgba(255, 255, 255, 0.3);
+  }
+  .cb-subbar-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+  }
+  .cb-subbar-dot.green { background: #4caf50; box-shadow: 0 0 4px #4caf50; }
+  .cb-subbar-dot.violet { background: #a78bfa; box-shadow: 0 0 4px #a78bfa; }
+  .cb-subbar-model {
+    margin-left: auto;
+    color: rgba(14, 165, 233, 0.4);
+  }
+
+  /* ====== Messages ====== */
+  .cb-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-height: 220px;
+    max-height: 340px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(14, 165, 233, 0.3) transparent;
+    background-image: radial-gradient(circle at top right, rgba(14, 165, 233, 0.04), transparent 70%);
+  }
+  .cb-messages::-webkit-scrollbar { width: 3px; }
+  .cb-messages::-webkit-scrollbar-track { background: transparent; }
+  .cb-messages::-webkit-scrollbar-thumb { background: rgba(14, 165, 233, 0.3); border-radius: 3px; }
+
+  /* Message bubbles structure (WhatsApp Style) */
+  .cb-msg {
+    display: flex;
+    gap: 10px;
+    max-width: 85%;
+    animation: cb-msg-in 0.25s ease-out;
+  }
+  @keyframes cb-msg-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .cb-msg.ai {
+    align-self: flex-start;
+  }
+  .cb-msg.user {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+  }
+
+  .cb-msg-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 14px;
+    background: rgba(14, 165, 233, 0.1);
+    border: 1px solid rgba(14, 165, 233, 0.25);
+    color: #0ea5e9;
+  }
+  .cb-msg.user .cb-msg-avatar {
+    background: rgba(167, 139, 250, 0.1);
+    border: 1px solid rgba(167, 139, 250, 0.25);
+    color: #a78bfa;
+  }
+
+  .cb-msg-bubble {
+    position: relative;
+    padding: 8px 12px 6px 12px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Left bubble tail pointing outwards */
+  .cb-msg.ai .cb-msg-bubble {
+    background: #202c33;
+    color: #e9edef;
+    border-top-left-radius: 0;
+  }
+  .cb-msg.ai .cb-msg-bubble::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -8px;
+    width: 8px;
+    height: 10px;
+    background: #202c33;
+    clip-path: polygon(100% 0, 0 0, 100% 100%);
+  }
+
+  /* Right bubble tail pointing outwards */
+  .cb-msg.user .cb-msg-bubble {
+    background: #005c4b;
+    color: #e9edef;
+    border-top-right-radius: 0;
+  }
+  .cb-msg.user .cb-msg-bubble::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -8px;
+    width: 8px;
+    height: 10px;
+    background: #005c4b;
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+  }
+
+  /* Error bubble style */
+  .cb-msg.error .cb-msg-bubble {
+    background: #441a1a;
+    color: #fca5a5;
+    border-top-left-radius: 0;
+  }
+  .cb-msg.error .cb-msg-bubble::before {
+    background: #441a1a;
+  }
+
+  /* Contact name headers inside bubbles (group mode) */
+  .cb-msg-name {
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 3px;
+    display: block;
+  }
+  .cb-msg.ai .cb-msg-name {
+    color: #34b7f1; /* WhatsApp blue contact name color */
+  }
+  .cb-msg.user .cb-msg-name {
+    color: #a78bfa;
+  }
+  .cb-msg.error .cb-msg-name {
+    color: #f87171;
+  }
+
+  .cb-msg-text {
+    font-size: 13px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  /* Timestamp and checks */
+  .cb-msg-meta {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4px;
+    margin-top: 4px;
+    font-size: 10px;
+    color: rgba(233, 237, 239, 0.4);
+    font-family: monospace;
+    user-select: none;
+  }
+  .cb-msg-check {
+    color: #53bdeb; /* light blue double read check */
+    font-weight: bold;
+    font-size: 10px;
+  }
+
+  /* ====== Thinking indicator ====== */
+  .cb-thinking {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: rgba(14, 165, 233, 0.04);
+    border-top: 1px solid rgba(14, 165, 233, 0.08);
+  }
+  .cb-thinking.visible { display: flex; }
+  .cb-thinking-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #0ea5e9;
+    animation: cb-thinking-bounce 1.2s ease-in-out infinite;
+  }
+  .cb-thinking-dot:nth-child(2) { animation-delay: 0.2s; }
+  .cb-thinking-dot:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes cb-thinking-bounce {
+    0%, 100% { transform: translateY(0); opacity: 0.3; }
+    50% { transform: translateY(-4px); opacity: 1; }
+  }
+  .cb-thinking-label {
+    font-family: monospace;
+    font-size: 8px;
+    letter-spacing: 0.15em;
+    color: rgba(14, 165, 233, 0.4);
+    margin-left: 4px;
+    animation: cb-blink 1.5s step-end infinite;
+  }
+  @keyframes cb-blink {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0; }
+  }
+
+  /* ====== Input area ====== */
+  .cb-input-area {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    padding: 12px 16px;
+    border-top: 1px solid rgba(14, 165, 233, 0.1);
+    background: rgba(0, 0, 0, 0.25);
+  }
+
+  /* Contact Chips Options */
+  .cb-options {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 4px 0;
+  }
+  .cb-options.hidden {
+    display: none !important;
+  }
+  .cb-option-btn {
+    padding: 8px 14px;
+    background: rgba(14, 165, 233, 0.1);
+    border: 1px solid rgba(14, 165, 233, 0.4);
+    border-radius: 20px;
+    color: #0ea5e9;
+    font-size: 12.5px;
+    font-family: inherit;
+    font-weight: 500;
+    cursor: none !important;
+    transition: all 0.2s ease;
+  }
+  .cb-option-btn:hover {
+    background: rgba(14, 165, 233, 0.2);
+    border-color: rgba(14, 165, 233, 0.7);
+    box-shadow: 0 0 10px rgba(14, 165, 233, 0.25);
+  }
+  .cb-option-cancel {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.4);
+    color: #f87171;
+  }
+  .cb-option-cancel:hover {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: rgba(239, 68, 68, 0.7);
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.25);
+  }
+
+  .cb-input-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(14, 165, 233, 0.25);
+    border-radius: 10px;
+    padding: 8px 12px;
+    transition: border-color 0.2s;
+  }
+  .cb-input-wrapper.hidden {
+    display: none !important;
+  }
+  .cb-input-wrapper:focus-within {
+    border-color: rgba(14, 165, 233, 0.5);
+    box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.08);
+  }
+  .cb-input-prefix {
+    font-family: monospace;
+    font-size: 12px;
+    color: rgba(14, 165, 233, 0.5);
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+  .cb-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: rgba(226, 232, 240, 0.95);
+    font-size: 13px;
+    line-height: 1.5;
+    resize: none;
+    font-family: inherit;
+    max-height: 80px;
+    overflow-y: auto;
+  }
+  .cb-input::placeholder {
+    color: rgba(255, 255, 255, 0.25);
+    font-size: 12px;
+  }
+
+  .cb-actions-wrapper {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .cb-send {
+    width: 38px;
+    height: 38px;
+    border: 1px solid rgba(14, 165, 233, 0.4);
+    border-radius: 10px;
+    background: rgba(14, 165, 233, 0.1);
+    color: #0ea5e9;
+    cursor: none !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  .cb-send.hidden {
+    display: none !important;
+  }
+  .cb-send:hover:not(:disabled) {
+    background: rgba(14, 165, 233, 0.2);
+    border-color: rgba(14, 165, 233, 0.7);
+    box-shadow: 0 0 12px rgba(14, 165, 233, 0.3);
+    transform: translateY(-1px);
+  }
+  .cb-send:disabled {
+    opacity: 0.4;
+    cursor: not-allowed !important;
+  }
+
+  /* Cancellation button for the contact flow steps */
+  .cb-cancel-flow {
+    width: 38px;
+    height: 38px;
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    border-radius: 10px;
+    background: rgba(239, 68, 68, 0.1);
+    color: #f87171;
+    cursor: none !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  .cb-cancel-flow.hidden {
+    display: none !important;
+  }
+  .cb-cancel-flow:hover {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: rgba(239, 68, 68, 0.7);
+    box-shadow: 0 0 12px rgba(239, 68, 68, 0.3);
+    transform: translateY(-1px);
+  }
+
+  /* ====== Disclaimer Footer ====== */
+  .cb-disclaimer {
+    font-size: 10.5px;
+    color: rgba(255, 255, 255, 0.4);
+    text-align: center;
+    padding: 8px 16px;
+    background: rgba(7, 10, 19, 0.95);
+    border-top: 1px solid rgba(14, 165, 233, 0.1);
+    line-height: 1.45;
+  }
+  .cb-contact-link {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #0ea5e9;
+    text-decoration: underline;
+    cursor: none !important;
+    font-weight: 600;
+    font-family: inherit;
+  }
+  .cb-contact-link:hover {
+    color: #a78bfa;
+  }
+
+  /* ====== Responsive ====== */
+  @media (max-width: 440px) {
+    .cb-window {
+      width: calc(100vw - 32px);
+      right: -4px;
+      max-height: 520px;
+    }
+    #chatbot-root {
+      bottom: 16px;
+      right: 16px;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    const root = document.getElementById('chatbot-root');
+    const toggle = document.getElementById('chatbot-toggle') as HTMLButtonElement;
+    const window_ = document.getElementById('chatbot-window');
+    const closeBtn = document.getElementById('chatbot-close') as HTMLButtonElement;
+    const messagesEl = document.getElementById('chatbot-messages');
+    const thinking = document.getElementById('chatbot-thinking');
+    const input = document.getElementById('chatbot-input') as HTMLTextAreaElement;
+    const sendBtn = document.getElementById('chatbot-send') as HTMLButtonElement;
+    const cancelFlowBtn = document.getElementById('chatbot-cancel-flow') as HTMLButtonElement;
+    const inputWrapper = document.getElementById('chatbot-input-wrapper');
+    const optionsEl = document.getElementById('chatbot-options');
+    const contactLink = document.getElementById('cb-contact-link') as HTMLButtonElement;
+
+    if (
+      !toggle || !window_ || !closeBtn || !messagesEl || !thinking ||
+      !input || !sendBtn || !cancelFlowBtn || !inputWrapper || !optionsEl || !contactLink
+    ) return;
+
+    let isOpen = false;
+    let isLoading = false;
+
+    // Contact Flow state machine variables
+    let chatState = 'chat'; // 'chat' | 'contact_name' | 'contact_method' | 'contact_value' | 'contact_message' | 'contact_sending'
+    let contactName = '';
+    let contactMethod = ''; // 'email' | 'phone'
+    let contactValue = '';
+    let contactMessage = '';
+
+    type Message = { role: 'user' | 'assistant'; content: string };
+    const history: Message[] = [];
+
+    // ---- Welcome message ----
+    const WELCOME = `¡Hola! Soy **R.AI v3.0**, el asistente virtual del portfolio de Ruben.
+
+Puedo informarte sobre su experiencia laboral, proyectos, habilidades técnicas y estudios. ¿De qué te gustaría hablar hoy?`;
+
+    // ---- Append message with WhatsApp group bubble style ----
+    function appendMessage(role: 'ai' | 'user' | 'error', text: string, timeStr?: string, preventScroll?: boolean) {
+      if (!timeStr) {
+        const now = new Date();
+        timeStr = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+      }
+
+      const wrap = document.createElement('div');
+      wrap.className = `cb-msg ${role}`;
+
+      const avatar = document.createElement('div');
+      avatar.className = 'cb-msg-avatar';
+      avatar.textContent = role === 'user' ? '👤' : '🤖';
+
+      const bubble = document.createElement('div');
+      bubble.className = 'cb-msg-bubble';
+
+      const name = document.createElement('span');
+      name.className = 'cb-msg-name';
+      if (role === 'user') {
+        name.textContent = 'Tú';
+      } else if (role === 'error') {
+        name.textContent = 'Sistema (Error)';
+      } else {
+        name.textContent = 'R.AI (Asistente)';
+      }
+
+      const textEl = document.createElement('div');
+      textEl.className = 'cb-msg-text';
+      // Simple markdown bold renderer
+      textEl.innerHTML = text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+      const meta = document.createElement('div');
+      meta.className = 'cb-msg-meta';
+      
+      const timeSpan = document.createElement('span');
+      timeSpan.textContent = timeStr;
+      meta.appendChild(timeSpan);
+
+      // Add double blue checkmark for User messages (WhatsApp read check)
+      if (role === 'user') {
+        const checkSpan = document.createElement('span');
+        checkSpan.className = 'cb-msg-check';
+        checkSpan.textContent = ' ✓✓';
+        meta.appendChild(checkSpan);
+      }
+
+      bubble.appendChild(name);
+      bubble.appendChild(textEl);
+      bubble.appendChild(meta);
+
+      wrap.appendChild(avatar);
+      wrap.appendChild(bubble);
+
+      messagesEl!.appendChild(wrap);
+      
+      if (!preventScroll) {
+        messagesEl!.scrollTop = messagesEl!.scrollHeight;
+      }
+    }
+
+    function setLoading(val: boolean) {
+      isLoading = val;
+      sendBtn.disabled = val;
+      if (val) {
+        thinking!.classList.add('visible');
+      } else {
+        thinking!.classList.remove('visible');
+      }
+    }
+
+    // ---- Toggle open/close ----
+    function openChat() {
+      isOpen = true;
+      window_!.classList.add('open');
+      window_!.setAttribute('aria-hidden', 'false');
+      toggle.classList.add('open');
+      
+      // Load welcome message on first open
+      if (history.length === 0 && messagesEl!.children.length === 0) {
+        appendMessage('ai', WELCOME, undefined, true);
+      }
+      setTimeout(() => {
+        if (chatState !== 'contact_method') {
+          input.focus();
+        }
+      }, 200);
+    }
+
+    function closeChat() {
+      isOpen = false;
+      window_!.classList.remove('open');
+      window_!.setAttribute('aria-hidden', 'true');
+      toggle.classList.remove('open');
+    }
+
+    toggle.addEventListener('click', () => isOpen ? closeChat() : openChat());
+    closeBtn.addEventListener('click', closeChat);
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen) closeChat();
+    });
+
+    // ---- Auto-resize textarea ----
+    input.addEventListener('input', () => {
+      input.style.height = 'auto';
+      input.style.height = Math.min(input.scrollHeight, 80) + 'px';
+    });
+
+    // ====== Contact Form Flow Logic ======
+
+    function startContactFlow() {
+      chatState = 'contact_name';
+      
+      // Reset variables
+      contactName = '';
+      contactMethod = '';
+      contactValue = '';
+      contactMessage = '';
+
+      // Set UI to text input mode
+      inputWrapper!.classList.remove('hidden');
+      sendBtn!.classList.remove('hidden');
+      cancelFlowBtn!.classList.remove('hidden');
+      optionsEl!.classList.add('hidden');
+      input.placeholder = 'Escribe tu nombre...';
+      input.value = '';
+
+      appendMessage('ai', '¡Estupendo! Vamos a preparar tu mensaje de contacto para Ruben. 📝\n\n¿Cuál es **tu nombre**?');
+      input.focus();
+    }
+
+    function selectContactMethod(method: string) {
+      if (method === 'cancel') {
+        cancelContactFlow();
+        return;
+      }
+
+      contactMethod = method;
+      chatState = 'contact_value';
+
+      // Restore text input mode
+      optionsEl!.classList.add('hidden');
+      inputWrapper!.classList.remove('hidden');
+      sendBtn!.classList.remove('hidden');
+      cancelFlowBtn!.classList.remove('hidden');
+
+      if (method === 'email') {
+        appendMessage('ai', 'Has elegido **Correo electrónico**. Por favor, introduce tu dirección de correo:');
+        input.placeholder = 'nombre@dominio.com';
+      } else {
+        appendMessage('ai', 'Has elegido **Teléfono**. Por favor, introduce tu número de teléfono:');
+        input.placeholder = 'ejemplo: 612 345 678';
+      }
+      input.value = '';
+      input.focus();
+    }
+
+    function cancelContactFlow() {
+      chatState = 'chat';
+      contactName = '';
+      contactMethod = '';
+      contactValue = '';
+      contactMessage = '';
+
+      // Restore standard UI
+      optionsEl!.classList.add('hidden');
+      inputWrapper!.classList.remove('hidden');
+      sendBtn!.classList.remove('hidden');
+      cancelFlowBtn!.classList.add('hidden');
+      input.placeholder = 'Pregúntame sobre Ruben...';
+      input.value = '';
+
+      appendMessage('ai', 'Contacto cancelado. ¿De qué te gustaría hablar ahora?');
+      input.focus();
+    }
+
+    async function submitContactForm() {
+      chatState = 'contact_sending';
+      setLoading(true);
+
+      // Hide input controls during sending
+      inputWrapper!.classList.add('hidden');
+      sendBtn!.classList.add('hidden');
+      cancelFlowBtn!.classList.add('hidden');
+
+      appendMessage('ai', 'Enviando tus datos a Ruben... 📤');
+
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: contactName,
+            method: contactMethod, // 'email' | 'phone'
+            contact: contactValue,
+            message: contactMessage
+          })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          appendMessage('ai', `¡Todo listo! Tus datos de contacto han sido enviados correctamente a **ruben.onsurbe@gmail.com**.\n\nRuben se pondrá en contacto contigo muy pronto. ¡Muchas gracias por escribir, **${contactName}**! ✨`);
+        } else {
+          appendMessage('error', `⚠ No se pudieron enviar tus datos: ${data.error || 'Error del servidor'}. Por favor, vuelve a intentarlo más tarde.`);
+        }
+      } catch (err) {
+        appendMessage('error', '⚠ Error de red al intentar enviar tu contacto. Comprueba tu conexión a Internet.');
+      } finally {
+        setLoading(false);
+        // Reset state
+        chatState = 'chat';
+        contactName = '';
+        contactMethod = '';
+        contactValue = '';
+        contactMessage = '';
+
+        // Restore normal text input
+        inputWrapper!.classList.remove('hidden');
+        sendBtn!.classList.remove('hidden');
+        input.placeholder = 'Pregúntame sobre Ruben...';
+        input.value = '';
+        setTimeout(() => input.focus(), 200);
+      }
+    }
+
+    async function handleUserInput(text: string) {
+      if (chatState === 'chat') {
+        // Normal chatbot flow
+        appendMessage('user', text);
+        history.push({ role: 'user', content: text });
+
+        setLoading(true);
+
+        try {
+          const res = await fetch('/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ messages: history }),
+          });
+
+          const data = await res.json();
+
+          if (!res.ok || data.error) {
+            appendMessage('error', `⚠ ${data.error ?? 'Error al procesar la respuesta'}`);
+          } else {
+            const reply = data.message as string;
+            appendMessage('ai', reply);
+            history.push({ role: 'assistant', content: reply });
+            if (history.length > 20) history.splice(0, 2);
+          }
+        } catch {
+          appendMessage('error', '⚠ No se pudo conectar con el servidor. Comprueba tu conexión.');
+        } finally {
+          setLoading(false);
+          input.focus();
+        }
+      } else if (chatState === 'contact_name') {
+        contactName = text;
+        appendMessage('user', text);
+
+        chatState = 'contact_method';
+        appendMessage('ai', `¡Encantado de conocerte, **${contactName}**! ¿Cómo prefieres que Ruben te contacte?\n\nElige una de estas opciones usando los botones de abajo:`);
+
+        // Switch to chip options mode
+        inputWrapper!.classList.add('hidden');
+        sendBtn!.classList.add('hidden');
+        cancelFlowBtn!.classList.add('hidden');
+        optionsEl!.classList.remove('hidden');
+      } else if (chatState === 'contact_value') {
+        appendMessage('user', text);
+        const val = text.trim();
+
+        // Validation based on chosen method
+        if (contactMethod === 'email') {
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(val)) {
+            appendMessage('ai', '⚠ El correo electrónico introducido no es válido. Por favor, introduce un correo correcto (ejemplo: **nombre@correo.com**):');
+            return;
+          }
+        } else if (contactMethod === 'phone') {
+          // Standard phone check (at least 9 digits, allowing + spaces and dashes)
+          const digits = val.replace(/[\s\-\+]/g, '');
+          const phoneRegex = /^\d{9,15}$/;
+          if (!phoneRegex.test(digits)) {
+            appendMessage('ai', '⚠ El número de teléfono no es válido. Por favor, introduce un número correcto (ejemplo: **600 123 456** o con prefijo **+34 600123456**):');
+            return;
+          }
+        }
+
+        contactValue = val;
+        chatState = 'contact_message';
+        appendMessage('ai', 'Por último, ¿cuál es el **motivo** por el que quieres contactar con Ruben?');
+        input.placeholder = 'Escribe el motivo del contacto...';
+        input.value = '';
+        input.focus();
+      } else if (chatState === 'contact_message') {
+        contactMessage = text;
+        appendMessage('user', text);
+        await submitContactForm();
+      }
+    }
+
+    // ---- Event Listeners ----
+
+    contactLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      // Only start flow if we aren't already in it
+      if (chatState === 'chat') {
+        startContactFlow();
+      }
+    });
+
+    cancelFlowBtn.addEventListener('click', cancelContactFlow);
+
+    // Click on option chips
+    optionsEl.addEventListener('click', (e) => {
+      const target = e.target as HTMLButtonElement;
+      if (target.classList.contains('cb-option-btn')) {
+        const val = target.getAttribute('data-value');
+        if (val) {
+          selectContactMethod(val);
+        }
+      }
+    });
+
+    async function sendMessage() {
+      const text = input.value.trim();
+      if (!text || isLoading) return;
+
+      input.value = '';
+      input.style.height = 'auto';
+
+      await handleUserInput(text);
+    }
+
+    sendBtn.addEventListener('click', sendMessage);
+    
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+  })();
+</script>
