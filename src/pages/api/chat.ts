@@ -98,11 +98,11 @@ Responde siempre en español a no ser que el usuario escriba en otro idioma.
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    const apiKey = import.meta.env.OPENROUTER_API_KEY;
+    const apiKey = import.meta.env.DEEPSEEK_API_KEY || process.env.DEEPSEEK_API_KEY;
     
     if (!apiKey) {
       return new Response(
-        JSON.stringify({ error: 'API key no configurada. Añade OPENROUTER_API_KEY en tu .env' }),
+        JSON.stringify({ error: 'API key no configurada. Añade DEEPSEEK_API_KEY en las variables de entorno de Vercel o en tu .env' }),
         { status: 500, headers: { 'Content-Type': 'application/json' } }
       );
     }
@@ -117,16 +117,14 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+    const response = await fetch('https://api.deepseek.com/chat/completions', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
-        'HTTP-Referer': 'https://rubenonsurbe.dev',
-        'X-Title': 'Ruben Onsurbe Portfolio',
       },
       body: JSON.stringify({
-        model: 'nex-agi/nex-n2-pro:free',
+        model: 'deepseek-chat',
         messages: [
           { role: 'system', content: PORTFOLIO_CONTEXT },
           ...messages
@@ -138,9 +136,9 @@ export const POST: APIRoute = async ({ request }) => {
 
     if (!response.ok) {
       const error = await response.text();
-      console.error('OpenRouter error:', error);
+      console.error('DeepSeek API error:', error);
       return new Response(
-        JSON.stringify({ error: 'Error al conectar con el modelo de IA' }),
+        JSON.stringify({ error: 'Error al conectar con el modelo DeepSeek' }),
         { status: response.status, headers: { 'Content-Type': 'application/json' } }
       );
     }
