@@ -15,10 +15,23 @@ const EDUCATION = [
         description: "IES Sierra de Guadarrama, Soto del Real, Madrid",
     },
 ];
+
+const COURSES = [
+    // Añade aquí tus cursos
+    // {
+    //     title: "Nombre del curso",
+    //     description: "Plataforma o institución · Año",
+    // },
+    {
+        title: "OCNA Wireless",
+        description:
+            "Omada | VIGI by TP-Link España · Expedicion: jul. 2026 · Vencimiento: jul. 2029 · ID de la credencial: 8A95011D563E4359",
+    },
+];
 ---
 
+<!-- Formación Académica -->
 <ol class="relative space-y-8">
-    <!-- Línea vertical central -->
     <div
         class="absolute left-6 top-0 bottom-0 w-1 bg-gradient-to-b from-cyan-500 via-violet-500 to-pink-500 shadow-lg shadow-cyan-500/50"
     >
@@ -35,3 +48,28 @@ const EDUCATION = [
         ))
     }
 </ol>
+
+<!-- Cursos y Certificaciones -->
+{
+    COURSES.length > 0 && (
+        <div class="mt-16">
+            <h3 class="text-2xl font-bold mb-8 flex items-center gap-3">
+                <span class="inline-block w-8 h-1 rounded-full bg-gradient-to-r from-cyan-400 to-violet-500" />
+                <span class="bg-gradient-to-r from-cyan-300 via-white to-violet-300 bg-clip-text text-transparent">
+                    Cursos y Certificaciones
+                </span>
+            </h3>
+            <ol class="relative space-y-8">
+                <div class="absolute left-6 top-0 bottom-0 w-1 bg-gradient-to-b from-violet-500 via-pink-500 to-cyan-500 shadow-lg shadow-violet-500/50" />
+                {COURSES.map((course) => (
+                    <li class="relative pl-20">
+                        <EducationItem
+                            title={course.title}
+                            description={course.description}
+                        />
+                    </li>
+                ))}
+            </ol>
+        </div>
+    )
+}
